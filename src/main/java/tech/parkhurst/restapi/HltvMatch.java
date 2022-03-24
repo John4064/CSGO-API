@@ -18,7 +18,7 @@ public class HltvMatch {
     private String typeofmatch;
     @Id
     @Column(name="match_id")
-    private String match_id;
+    private int match_id;
 
     @Column(name="score_tA")
     private int scoreA;
@@ -37,7 +37,7 @@ public class HltvMatch {
         return competition;
     }
 
-    public String getMatch_id() {
+    public int getMatch_id() {
         return match_id;
     }
 
