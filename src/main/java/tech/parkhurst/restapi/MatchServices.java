@@ -21,4 +21,12 @@ public class MatchServices {
     public HltvMatch getUserById(int id) {
         return MatchRepository.findById(id).orElse(null);
     }
+
+
+    /*
+    public List<HltvMatch> findTeam(String name){
+        return MatchRepository.findByTeam(name);
+    }
+
+     */
 }
