@@ -7,9 +7,9 @@ import javax.persistence.*;
 public class HltvMatch {
 
     @Column(name="team_A")
-    private String team_A;
+    private String teamA;
     @Column(name="team_B")
-    private String team_B;
+    private String teamB;
     @Column(name="match_url")
     private String url;
     @Column(name="competition")
@@ -18,7 +18,7 @@ public class HltvMatch {
     private String typeofmatch;
     @Id
     @Column(name="match_id")
-    private int match_id;
+    private int matchid;
 
     @Column(name="score_tA")
     private int scoreA;
@@ -38,15 +38,15 @@ public class HltvMatch {
     }
 
     public int getMatch_id() {
-        return match_id;
+        return matchid;
     }
 
-    public String getTeam_A() {
-        return team_A;
+    public String getTeamA() {
+        return teamA;
     }
 
     public String getTeam_B() {
-        return team_B;
+        return teamB;
     }
 
     public String getTypeofmatch() {
@@ -60,9 +60,9 @@ public class HltvMatch {
     @Override
     public String toString() {
         return "Match{" +
-                "id=" + match_id +
-                ", Team A='" + team_A + '\'' +
-                ", Team B='" + team_B + '\'' +
+                "id=" + matchid +
+                ", Team A='" + teamA + '\'' +
+                ", Team B='" + teamB + '\'' +
                 ", url=" + url +
                 '}';
     }

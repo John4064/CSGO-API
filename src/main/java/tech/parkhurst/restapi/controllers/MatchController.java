@@ -21,12 +21,6 @@ public class MatchController {
     public ResponseEntity<List<HltvMatch>> findAll(){
         return ResponseEntity.ok(services.getUserList());
     }
-    /*
-    @GetMapping("/test123")
-    public ResponseEntity<List<HltvMatch>> test123(){
-        return ResponseEntity.ok(services.findTeam("fnatic"));
-    }
-    */
 
     @GetMapping("/match/{id}")
     public ResponseEntity<HltvMatch> getMatchById(@PathVariable int id) {
@@ -38,13 +32,27 @@ public class MatchController {
         }
     }
 
+
+    @GetMapping("/comp/{name}")
+    public ResponseEntity<List<HltvMatch>> getComp(@PathVariable String name){
+        return ResponseEntity.ok().body(this.services.getComp(name));
+    }
+
+
+    @GetMapping("/team/{name}")
+    public ResponseEntity<List<HltvMatch>> findOneTeam(@PathVariable String name){
+        return ResponseEntity.ok(this.services.findA(name));
+    }
+
+
     @GetMapping("/error")
     public ResponseEntity catchError(){
         return ResponseEntity.ok().body("Error has Occured");
     }
 
-    @GetMapping("/*")
+    @RequestMapping("/*")
     public ResponseEntity catchAll(){
+        //Catch any unspecified endpoints
         return ResponseEntity.ok().body("This End Point does not Exist!");
     }
 
