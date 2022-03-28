@@ -37,7 +37,11 @@ public class MatchServices {
         return MatchRepository.findByCompetitionIsIgnoreCase(competition);
     }
 
-    public List<HltvMatch> findA(String name){
-        return MatchRepository.findByTeamA(name);
+    /**
+     * @param name Team name you want to look up
+     * @return A list of matches the specified team played
+     */
+    public List<HltvMatch> findTeam(String name){
+        return MatchRepository.findByTeamAIgnoreCaseOrTeamBIgnoreCase(name,name);
     }
 }

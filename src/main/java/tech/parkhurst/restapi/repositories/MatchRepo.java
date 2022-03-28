@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface MatchRepo extends JpaRepository<HltvMatch, Integer> {
 
-    List<HltvMatch> findByTeamA(String teamA);
+    List<HltvMatch> findByTeamAIgnoreCaseOrTeamBIgnoreCase(String teamA, String teamB);
     List<HltvMatch> findByCompetitionIsIgnoreCase(String competition);
-
-    //List<HltvMatch> findHltvMatchesByTeam_A(String team_A);
 }

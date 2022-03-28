@@ -40,8 +40,8 @@ public class MatchController {
 
 
     @GetMapping("/team/{name}")
-    public ResponseEntity<List<HltvMatch>> findOneTeam(@PathVariable String name){
-        return ResponseEntity.ok(this.services.findA(name));
+    public ResponseEntity<List<HltvMatch>> findTeamMatches(@PathVariable String name){
+        return ResponseEntity.ok(this.services.findTeam(name));
     }
 
 
