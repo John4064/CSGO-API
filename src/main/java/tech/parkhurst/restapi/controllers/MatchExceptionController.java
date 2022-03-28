@@ -1,8 +1,9 @@
-package tech.parkhurst.restapi;
+package tech.parkhurst.restapi.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import tech.parkhurst.restapi.MatchNotfoundException;
 
 @ControllerAdvice
 public class MatchExceptionController {

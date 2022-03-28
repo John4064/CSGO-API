@@ -1,12 +1,14 @@
-package tech.parkhurst.restapi;
+package tech.parkhurst.restapi.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import tech.parkhurst.restapi.MatchNotfoundException;
+import tech.parkhurst.restapi.MatchServices;
+import tech.parkhurst.restapi.entities.HltvMatch;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -24,32 +26,26 @@ public class MatchController {
     public ResponseEntity<List<HltvMatch>> test123(){
         return ResponseEntity.ok(services.findTeam("fnatic"));
     }
-*/
+    */
 
-
-    @GetMapping("/user/{id}")
-    public ResponseEntity<HltvMatch> getUserById(@PathVariable int id) {
-        HltvMatch specMatch = this.services.getUserById(id);
+    @GetMapping("/match/{id}")
+    public ResponseEntity<HltvMatch> getMatchById(@PathVariable int id) {
+        HltvMatch specMatch = this.services.getMatchById(id);
         if(specMatch != null){
             return ResponseEntity.ok().body(specMatch);
         }else{
-            System.out.println("TEST123");
             throw new MatchNotfoundException();
         }
     }
 
-    /*
-    @ExceptionHandler(value = MatchNotfoundException.class)
-    public ResponseEntity<Object> exception(MatchNotfoundException exception) {
-
-    }
-     */
-
-
-
-
     @GetMapping("/error")
-    public ResponseEntity albino(){
+    public ResponseEntity catchError(){
         return ResponseEntity.ok().body("Error has Occured");
     }
+
+    @GetMapping("/*")
+    public ResponseEntity catchAll(){
+        return ResponseEntity.ok().body("This End Point does not Exist!");
+    }
+
 }

@@ -1,9 +1,7 @@
-package tech.parkhurst.restapi;
+package tech.parkhurst.restapi.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
-import java.util.Optional;
+import tech.parkhurst.restapi.entities.HltvMatch;
 
 public interface MatchRepo extends JpaRepository<HltvMatch, Integer> {
 

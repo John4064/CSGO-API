@@ -1,9 +1,9 @@
 package tech.parkhurst.restapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import tech.parkhurst.restapi.HltvMatch;
-import tech.parkhurst.restapi.MatchRepo;
+import tech.parkhurst.restapi.entities.HltvMatch;
 import org.springframework.stereotype.Service;
+import tech.parkhurst.restapi.repositories.MatchRepo;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class MatchServices {
         return MatchRepository.findAll();
     }
 
-    public HltvMatch getUserById(int id) {
+    public HltvMatch getMatchById(int id) {
         return MatchRepository.findById(id).orElse(null);
     }
 

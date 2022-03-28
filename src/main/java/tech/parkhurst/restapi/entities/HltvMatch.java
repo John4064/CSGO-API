@@ -1,4 +1,4 @@
-package tech.parkhurst.restapi;
+package tech.parkhurst.restapi.entities;
 import javax.persistence.*;
 
 
