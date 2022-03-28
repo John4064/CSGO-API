@@ -4,8 +4,8 @@ package tech.parkhurst.restapi.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import tech.parkhurst.restapi.MatchNotfoundException;
-import tech.parkhurst.restapi.MatchServices;
+import tech.parkhurst.restapi.exceptions.MatchNotfoundException;
+import tech.parkhurst.restapi.services.MatchServices;
 import tech.parkhurst.restapi.entities.HltvMatch;
 
 import java.util.List;
