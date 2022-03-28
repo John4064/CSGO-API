@@ -2,13 +2,11 @@ package tech.parkhurst.restapi;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -31,8 +29,24 @@ public class MatchController {
 
     @GetMapping("/user/{id}")
     public ResponseEntity<HltvMatch> getUserById(@PathVariable int id) {
-        return ResponseEntity.ok().body(this.services.getUserById(id));
+        HltvMatch specMatch = this.services.getUserById(id);
+        if(specMatch != null){
+            return ResponseEntity.ok().body(specMatch);
+        }else{
+            System.out.println("TEST123");
+            throw new MatchNotfoundException();
+        }
     }
+
+    /*
+    @ExceptionHandler(value = MatchNotfoundException.class)
+    public ResponseEntity<Object> exception(MatchNotfoundException exception) {
+
+    }
+     */
+
+
+
 
     @GetMapping("/error")
     public ResponseEntity albino(){
