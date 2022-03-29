@@ -17,7 +17,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 #### Get all items
 
 ```http
-  GET /api/items
+  GET /api/findall
 ```
 
 | Parameter | Type     | Description                |
@@ -42,6 +42,7 @@ Takes two numbers and returns the sum.
 ## Acknowledgements
 
  - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
+ - [HTV](https://www.hltv.org/)
 
 
 ## Documentation
