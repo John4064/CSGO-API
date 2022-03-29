@@ -12,7 +12,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 
 ## API Reference
 
-#### Get all items
+#### Get all matches
 
 ```http
   GET /api/findall
