@@ -25,7 +25,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 #### Get match
 
 ```http
-  GET /api/match/${id}
+  GET /api/match/{id}
 ```
 
 | Parameter | Type     | Description                       |
@@ -35,7 +35,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 #### Get team matches
 
 ```http
-  GET /api/team/${name}
+  GET /api/team/{name}
 ```
 
 | Parameter | Type     | Description                       |
