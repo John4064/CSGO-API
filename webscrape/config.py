@@ -1,0 +1,1 @@
+url = "https://www.hltv.org/results"
