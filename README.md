@@ -53,7 +53,7 @@ Takes two numbers and returns the sum.
 
 - [] Base Functionality
   - [] Full Match Search
-  - [] 
+  - [] Advanced Match Breakdown
 - [] Automation
   - [] Automated Webscraping for HLTV Match Data
   - [] Connection to database to upload data
