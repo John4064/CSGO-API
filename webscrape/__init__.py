@@ -1,2 +1,5 @@
 #John Parkhurst
-print(1)
+from app import HltvScraper
+
+if __name__ == '__main__':
+    myApp = HltvScraper()
