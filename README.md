@@ -42,6 +42,15 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 | :-------- | :------- | :-------------------------------- |
 | `name`      | `string` | **Required**. Name of team in match |
 
+#### Get matches in competion
+
+```http
+  GET /api/comp/{name}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | **Required**. Name of tournamemt |
 
 ## Acknowledgements
 
