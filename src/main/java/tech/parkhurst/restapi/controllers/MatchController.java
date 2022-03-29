@@ -50,7 +50,7 @@ public class MatchController {
         return ResponseEntity.ok().body("Error has Occured");
     }
 
-    @RequestMapping("/*")
+    @RequestMapping("*")
     public ResponseEntity catchAll(){
         //Catch any unspecified endpoints
         return ResponseEntity.ok().body("This End Point does not Exist!");
