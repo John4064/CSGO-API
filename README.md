@@ -22,19 +22,25 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 | :-------- | :------- | :------------------------- |
 | `api_key` | `string` | **Required**. Your API key |
 
-#### Get item
+#### Get match
 
 ```http
-  GET /api/items/${id}
+  GET /api/match/${id}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
+| `id`      | `string` | **Required**. Id of match to fetch |
 
-#### add(num1, num2)
+#### Get team matches
 
-Takes two numbers and returns the sum.
+```http
+  GET /api/team/${name}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | **Required**. Name of team in match |
 
 
 ## Acknowledgements
