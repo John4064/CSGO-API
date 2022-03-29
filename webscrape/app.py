@@ -2,7 +2,7 @@
 #Brief: Selenium Web Scraping application for hltv.org
 from config import *
 from selenium import webdriver
-
+import re
 
 class HltvScraper():
 
