@@ -18,9 +18,6 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
   GET /api/findall
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
 
 #### Get match
 
