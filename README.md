@@ -42,7 +42,7 @@ Takes two numbers and returns the sum.
 ## Acknowledgements
 
  - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
- - [HTV](https://www.hltv.org/)
+ - [HLTV](https://www.hltv.org/)
 
 
 ## Documentation
