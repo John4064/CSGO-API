@@ -4,8 +4,8 @@ package tech.parkhurst.restapi.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import tech.parkhurst.restapi.MatchNotfoundException;
-import tech.parkhurst.restapi.MatchServices;
+import tech.parkhurst.restapi.exceptions.MatchNotfoundException;
+import tech.parkhurst.restapi.services.MatchServices;
 import tech.parkhurst.restapi.entities.HltvMatch;
 
 import java.util.List;
@@ -40,8 +40,8 @@ public class MatchController {
 
 
     @GetMapping("/team/{name}")
-    public ResponseEntity<List<HltvMatch>> findOneTeam(@PathVariable String name){
-        return ResponseEntity.ok(this.services.findA(name));
+    public ResponseEntity<List<HltvMatch>> findTeamMatches(@PathVariable String name){
+        return ResponseEntity.ok(this.services.findTeam(name));
     }
 
 
@@ -50,7 +50,7 @@ public class MatchController {
         return ResponseEntity.ok().body("Error has Occured");
     }
 
-    @RequestMapping("/*")
+    @RequestMapping("*")
     public ResponseEntity catchAll(){
         //Catch any unspecified endpoints
         return ResponseEntity.ok().body("This End Point does not Exist!");
