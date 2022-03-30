@@ -49,6 +49,16 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 | :-------- | :------- | :-------------------------------- |
 | `name`      | `string` | **Required**. Name of tournamemt |
 
+#### Get matches of same type
+
+```http
+  GET /api/type/{typename}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `typename`      | `string` | **Required**. Type of Match(bo3,bo5) |
+
 ## Acknowledgements
 
  - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
