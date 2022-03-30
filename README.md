@@ -47,7 +47,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `name`      | `string` | **Required**. Name of tournamemt |
+| `name`      | `string` | **Required**. Name of tournament |
 
 #### Get matches of same type
 
@@ -57,7 +57,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `typename`      | `string` | **Required**. Type of Match(bo3,bo5) |
+| `typename`      | `string` | **Required**. Type of match(bo3,bo5) |
 
 ## Acknowledgements
 
