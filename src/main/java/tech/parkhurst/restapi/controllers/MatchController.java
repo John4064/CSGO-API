@@ -44,6 +44,13 @@ public class MatchController {
         return ResponseEntity.ok(this.services.findTeam(name));
     }
 
+    @GetMapping("/type/{typematch}")
+    public ResponseEntity<List<HltvMatch>> gatherTypes(@PathVariable String typematch){
+        return ResponseEntity.ok(this.services.gatherType(typematch));
+    }
+
+
+
 
     @GetMapping("/error")
     public ResponseEntity catchError(){
