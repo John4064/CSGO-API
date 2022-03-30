@@ -43,4 +43,12 @@ public class MatchServices {
     public List<HltvMatch> findTeam(String name){
         return MatchRepository.findByTeamAIgnoreCaseOrTeamBIgnoreCase(name,name);
     }
+
+    /**
+     * @param typeofmatch The specific kind of match(bo3,bo5,trn(train))
+     * @return a list of matches that have tht type of match(all bo3 matches)
+     */
+    public List<HltvMatch> gatherType(String typeofmatch){
+        return MatchRepository.findByTypeofmatchIgnoreCase(typeofmatch);
+    }
 }
