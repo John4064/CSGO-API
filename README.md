@@ -5,8 +5,7 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 
 ## Badges
 
-Add badges from somewhere like: [shields.io](https://shields.io/)
-
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/John4064/CSGO-API)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://choosealicense.com/licenses/mit/)
 
 
