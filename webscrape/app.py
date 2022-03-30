@@ -17,7 +17,10 @@ class HltvScraper():
         :return: None
         """
         resultData = login_form = self.driver.find_elements(by=By.CLASS_NAME,value="result-con")
-        print(resultData)
+        for element in resultData:
+            print(element.text)
+            print("NEW MATCH")
+
         return
 
     def __init__(self):
