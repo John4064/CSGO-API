@@ -44,18 +44,28 @@ public class MatchController {
         return ResponseEntity.ok(this.services.findTeam(name));
     }
 
+
     @GetMapping("/type/{typematch}")
     public ResponseEntity<List<HltvMatch>> gatherTypes(@PathVariable String typematch){
         return ResponseEntity.ok(this.services.gatherType(typematch));
     }
 
 
+    @GetMapping("/top/{num}")
+    public ResponseEntity<String> topNum(@PathVariable int num){
+        List<HltvMatch> topCollection = services.getUserList();
+        for(int i = 0; i < num;i++){
+            System.out.println(topCollection.get(i));
+        }
+        return ResponseEntity.ok("a");
+    }
 
 
     @GetMapping("/error")
     public ResponseEntity catchError(){
         return ResponseEntity.ok().body("Error has Occured");
     }
+
 
     @RequestMapping("*")
     public ResponseEntity catchAll(){
