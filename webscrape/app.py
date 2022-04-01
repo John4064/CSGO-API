@@ -1,5 +1,6 @@
 # Author: John Parkhurst
 # Brief: Selenium Web Scraping application for hltv.org
+from selenium.webdriver import *
 from selenium.webdriver.common.by import By
 
 from config import *
@@ -18,7 +19,8 @@ class HltvScraper():
         """
         resultData = login_form = self.driver.find_elements(by=By.CLASS_NAME,value="result-con")
         for element in resultData:
-            print(element.text)
+            temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']/span[1]")
+            print(temp.text)
             print("NEW MATCH")
 
         return
