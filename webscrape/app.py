@@ -25,6 +25,9 @@ class HltvScraper():
 
         return
 
+#Plan is to iterate through all the matches on said page and put into json of info to add to our api!
+
+
     def __init__(self):
         print("Scrape Initiated")
         self.driver = webdriver.Firefox()
