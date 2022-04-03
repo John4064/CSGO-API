@@ -61,6 +61,7 @@ public class MatchController {
     }
 
 
+
     @GetMapping("/error")
     public ResponseEntity catchError(){
         return ResponseEntity.ok().body("Error has Occured");
