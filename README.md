@@ -69,7 +69,7 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 ## Roadmap
 
 - [] Base Functionality
-  - [/] Full Match Search
+  - [x] Full Match Search
   - [] Advanced Match Breakdown
   - [] Documentation Completion
 - [] Automation
