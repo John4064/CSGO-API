@@ -18,9 +18,14 @@ public class AdminController {
     @Autowired
     private MatchServices services;
 
+
     //DOESNT save our json data
-    @PostMapping("/add/")
+    @PostMapping(value = "/add/", consumes = "application/json", produces = "application/json")
     public ResponseEntity<HltvMatch> addUser(@RequestBody HltvMatch match) {
-        return ResponseEntity.ok(this.services.createMatch(match));
+        System.out.println(match.getMatch_id());
+        System.out.println(match.getTeamA());
+        //return ResponseEntity.ok(this.services.createMatch(match));
+        //could redirect to another page return "redirect:/employee";
+        return ResponseEntity.ok(match);
     }
 }
