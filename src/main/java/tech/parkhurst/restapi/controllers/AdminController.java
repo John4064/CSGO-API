@@ -9,8 +9,9 @@ import tech.parkhurst.restapi.entities.HltvMatch;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    @PostMapping("/addmatch/")
 
+
+    @PostMapping("/add/")
     public HltvMatch addMatch(){
         HltvMatch test = new HltvMatch();
          return test;
