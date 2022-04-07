@@ -18,11 +18,12 @@ class HltvScraper():
         :return: None
         """
         resultData = login_form = self.driver.find_elements(by=By.CLASS_NAME,value="result-con")
+
         for element in resultData:
-            temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']/span[1]")
+            temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']")
             print(temp.text)
             print("NEW MATCH")
-
+        
         return
 
 #Plan is to iterate through all the matches on said page and put into json of info to add to our api!
