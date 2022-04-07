@@ -51,4 +51,12 @@ public class MatchServices {
     public List<HltvMatch> gatherType(String typeofmatch){
         return MatchRepository.findByTypeofmatchIgnoreCase(typeofmatch);
     }
+
+    /**
+     * @param match is an HltvMatch object that we add to our db
+     * @return
+     */
+    public HltvMatch createMatch(HltvMatch match) {
+        return MatchRepository.save(match);
+    }
 }
