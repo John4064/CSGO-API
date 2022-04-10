@@ -55,6 +55,16 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 | :-------- | :------- | :-------------------------------- |
 | `typename`      | `string` | **Required**. Type of match(bo3,bo5) |
 
+#### Add matches to the database
+
+```http
+  POST /admin/add/
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `typename`      | `string` | **Required**. Type of match(bo3,bo5) |
+
 ## Acknowledgements
 
  - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
