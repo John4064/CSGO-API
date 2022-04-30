@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.parkhurst.restapi.entities.HltvMatch;
+import tech.parkhurst.restapi.exceptions.MatchIdFoundException;
+import tech.parkhurst.restapi.exceptions.MatchNotfoundException;
 import tech.parkhurst.restapi.services.MatchServices;
+import tech.parkhurst.restapi.exceptions.MatchIdFoundException;
+
 
 @RestController
 @RequestMapping("/admin")
@@ -21,11 +25,18 @@ public class AdminController {
 
     //DOESNT save our json data
     @PostMapping(value = "/add/", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<String> addUser(@RequestBody HltvMatch match) {
-        //Check if
-        this.services.createMatch(match);
-        return ResponseEntity.ok("Success");
-        //could redirect to another page return "redirect:/employee";
-        //return ResponseEntity.ok(match);
+    public ResponseEntity<HltvMatch> addUser(@RequestBody HltvMatch match) {
+        //Check if match id exists if it does throw
+        try{
+            HltvMatch checkM = this.services.getMatchById(match.getMatchid());
+            if(checkM==null){
+                throw new MatchNotfoundException();
+            }
+        }catch(MatchNotfoundException excep){
+            System.out.println("ADD NEW MATCH");
+        }
+        System.out.println("TESt");
+
+        return ResponseEntity.ok(this.services.createMatch(match));
     }
 }
