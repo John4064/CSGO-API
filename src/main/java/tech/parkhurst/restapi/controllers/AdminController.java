@@ -30,13 +30,16 @@ public class AdminController {
         try{
             HltvMatch checkM = this.services.getMatchById(match.getMatchid());
             if(checkM==null){
+                //New match we must insert
                 throw new MatchNotfoundException();
+            }else{
+                //Already Exists
+                throw new MatchIdFoundException();
             }
         }catch(MatchNotfoundException excep){
             System.out.println("ADD NEW MATCH");
+            return ResponseEntity.ok(this.services.createMatch(match));
         }
-        System.out.println("TESt");
 
-        return ResponseEntity.ok(this.services.createMatch(match));
     }
 }
