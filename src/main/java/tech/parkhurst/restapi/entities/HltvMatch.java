@@ -18,6 +18,7 @@ public class HltvMatch {
     private String typeofmatch;
     @Id
     @Column(name="match_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int matchid;
 
     @Column(name="score_tA")
@@ -45,7 +46,7 @@ public class HltvMatch {
         return teamA;
     }
 
-    public String getTeam_B() {
+    public String getTeamB() {
         return teamB;
     }
 
