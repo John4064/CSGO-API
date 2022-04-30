@@ -63,8 +63,19 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `typename`      | `string` | **Required**. Type of match(bo3,bo5) |
-
+| `HltvMatch`      | `json String` | **Required** Match    |
+```text
+{   
+    "teamA": "32ab",
+    "teamB": "bad",
+    "url": "ab",
+    "competition": "bo3",
+    "typeofmatch": "comp",
+    "scoreA": 663,
+    "scoreB": 666,
+    "matchid": 5
+} 
+```
 ## Acknowledgements
 
  - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
