@@ -22,7 +22,7 @@ public class AdminController {
     //DOESNT save our json data
     @PostMapping(value = "/add/", consumes = "application/json", produces = "application/json")
     public ResponseEntity<HltvMatch> addUser(@RequestBody HltvMatch match) {
-        System.out.println(match.getMatch_id());
+        System.out.println(match.getMatchid());
         System.out.println(match.getTeamB());
         //return ResponseEntity.ok(this.services.createMatch(match));
         //could redirect to another page return "redirect:/employee";

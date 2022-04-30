@@ -20,7 +20,8 @@ public class HltvMatch {
     @Column(name="match_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int matchid;
-
+    //    @Column(name="team_B")
+    //    private String teamB;
     @Column(name="score_tA")
     private int scoreA;
     @Column(name="score_tB")
@@ -38,7 +39,7 @@ public class HltvMatch {
         return competition;
     }
 
-    public int getMatch_id() {
+    public int getMatchid() {
         return matchid;
     }
 
