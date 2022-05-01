@@ -31,7 +31,10 @@ class HltvScraper():
 
     def __init__(self):
         print("Scrape Initiated")
-        self.driver = webdriver.Firefox()
+        #Mac
+        #self.driver = webdriver.Firefox()
+        #windows
+        self.driver=webdriver.Chrome(executable_path="C:/Users/jpark/Documents/chromedriver.exe")
         self.driver.get(url)
         try:
             self.gatherData()
