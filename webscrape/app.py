@@ -2,6 +2,8 @@
 # Brief: Selenium Web Scraping application for hltv.org
 from selenium.webdriver import *
 from selenium.webdriver.common.by import By
+from bs4 import BeautifulSoup
+import requests
 
 from config import *
 from selenium import webdriver
@@ -10,37 +12,33 @@ import re
 
 class HltvScraper():
 
+    """
+        resultData = login_form = self.driver.find_elements(by=By.CLASS_NAME,value="result-con")
 
+        for element in resultData:
+            temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']")
+            """
     #Looking for class result-con
     def gatherData(self) -> None:
         """
         @brief: Gathers the html content that we want from the page
         :return: None
         """
-        resultData = login_form = self.driver.find_elements(by=By.CLASS_NAME,value="result-con")
+        print(self.page.text)
+        print("aa")
 
-        for element in resultData:
-            temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']")
-            print(temp.text)
-            print("NEW MATCH")
-        
         return
 
 #Plan is to iterate through all the matches on said page and put into json of info to add to our api!
-
-
     def __init__(self):
         print("Scrape Initiated")
         #Mac
         #self.driver = webdriver.Firefox()
         #windows
-        self.driver=webdriver.Chrome(executable_path="C:/Users/jpark/Documents/chromedriver.exe")
-        self.driver.get(url)
+        self.page = requests.get(resulturl)
         try:
             self.gatherData()
         except:
-            self.driver.close()
             print("ERROR")
             return
-        self.driver.close()
         print("DONE")
