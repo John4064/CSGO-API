@@ -52,12 +52,11 @@ public class MatchController {
 
 
     @GetMapping("/top/{num}")
-    public ResponseEntity<String> topNum(@PathVariable int num){
-        List<HltvMatch> topCollection = services.getUserList();
-        for(int i = 0; i < num;i++){
-            System.out.println(topCollection.get(i));
-        }
-        return ResponseEntity.ok("a");
+    public ResponseEntity<List<HltvMatch>> topNum(@PathVariable int num){
+        List<HltvMatch> allCollec = services.getUserList();
+        //Better way to optimizer services getuserlist
+        List<HltvMatch> numCollection =allCollec.subList(0,num);
+        return ResponseEntity.ok(numCollection);
     }
 
 
