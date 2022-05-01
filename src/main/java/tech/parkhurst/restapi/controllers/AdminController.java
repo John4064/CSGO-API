@@ -23,7 +23,6 @@ public class AdminController {
     private MatchServices services;
 
 
-    //DOESNT save our json data
     @PostMapping(value = "/add/", consumes = "application/json", produces = "application/json")
     public ResponseEntity<HltvMatch> addUser(@RequestBody HltvMatch match) {
         //Check if match id exists if it does throw
