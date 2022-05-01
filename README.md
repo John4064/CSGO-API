@@ -56,6 +56,16 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 | :-------- | :------- | :-------------------------------- |
 | `typename`      | `string` | **Required**. Type of match(bo3,bo5) |
 
+#### Get top x
+
+```http
+  GET /api/top/{number}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `top`      | `int` | **Required**. # of matches you want? |
+
 #### Add matches to the database
 
 ```http
