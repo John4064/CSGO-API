@@ -1,1 +1,2 @@
-url = "https://www.hltv.org/results"
+resulturl = "https://www.hltv.org/results"
+baseurl = "https://www.hltv.org/"
