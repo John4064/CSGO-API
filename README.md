@@ -64,7 +64,7 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `HltvMatch`      | `json String` | **Required** Match    |
-```text
+```json
 {   
     "teamA": "32ab",
     "teamB": "bad",
