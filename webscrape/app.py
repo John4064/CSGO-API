@@ -1,12 +1,9 @@
 # Author: John Parkhurst
 # Brief: Selenium Web Scraping application for hltv.org
-from selenium.webdriver import *
-from selenium.webdriver.common.by import By
+
 from bs4 import BeautifulSoup
 import requests
-
 from config import *
-from selenium import webdriver
 import re
 
 
@@ -18,26 +15,46 @@ class HltvScraper():
         for element in resultData:
             temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']")
             """
-    #Looking for class result-con
-    def gatherData(self) -> None:
+
+
+
+    def gatherSize(self)-> None:
         """
-        @brief: Gathers the html content that we want from the page
+        @brief: We use our field self.page to analyze the page to figure out how many matches there are to scrape!\n
+        Sets self.size\n
         :return: None
         """
-        print(self.page.text)
-        print("aa")
+
+        self.size =0
+        return
+
+    #Looking for class result-con
+    def processData(self) -> None:
+        """
+        @brief: Processes the html we scraped off the page!
+        :return: None
+        """
+        #Result Text
+
+        soup = BeautifulSoup(self.page.content, "html.parser")
+        results = soup.find(id="pagination-data")
+        job_elements = soup.find_all("span", class_="pagination-data")
+        for job_element in job_elements:
+            print(job_element.text)
+
+        if(results!= None):
+            #print(results.prettify())
+            print(self.page.text)
 
         return
 
 #Plan is to iterate through all the matches on said page and put into json of info to add to our api!
     def __init__(self):
         print("Scrape Initiated")
-        #Mac
-        #self.driver = webdriver.Firefox()
-        #windows
         self.page = requests.get(resulturl)
+        self.processData()
         try:
-            self.gatherData()
+            print("BEEEP")
         except:
             print("ERROR")
             return
