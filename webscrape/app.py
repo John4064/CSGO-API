@@ -18,6 +18,10 @@ class HltvScraper():
             temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']")
             """
 
+    idList =[]
+    urlList =[]
+    matchStat = []
+
     def gatherSize(self) -> None:
         """
         @brief: We use our field self.page to analyze the page to figure out how many matches there are to scrape!\n
@@ -54,8 +58,8 @@ class HltvScraper():
             if ('matches' in link.get('href')):
                 # THIS IS THE MATCHURL print(baseurl+link.get('href'))
                 #print(link.get('href'))
-                test=link.get('href').split('/')
-                print(test[2])
+                tempList=link.get('href').split('/')
+                self.idList.append(tempList[2])
 
         # This Gets all the match data
         #for test in soup.find_all("div", class_="result-con"):
@@ -66,6 +70,12 @@ class HltvScraper():
             print(self.page.text)
         # print(self.page.text)
         return
+
+    def report(self):
+        for elem in self.idList:
+            print("ID IS :{}".format(elem))
+        return
+
 
     # Plan is to iterate through all the matches on said page and put into json of info to add to our api!
     def __init__(self):
@@ -80,4 +90,5 @@ class HltvScraper():
         except:
             print("ERROR")
             return
+        self.report()
         print("DONE")
