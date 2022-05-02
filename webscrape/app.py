@@ -49,16 +49,15 @@ class HltvScraper():
         results = soup.find(id="pagination-data")
 
         # job_elements = soup.find_all("div", class_="result-con")
-        # print(job_elements[0].get('href'))
-        # job_elements = soup.find_all("span", class_="pagination-data")
+        # This handles match url and where we get ID
         for link in soup.find_all("a", class_="a-reset"):
             if ('matches' in link.get('href')):
                 # THIS IS THE MATCHURL print(baseurl+link.get('href'))
                 break
 
-        # print(job_elements[0].get('href'))
+        # This Gets all the match data
         for test in soup.find_all("div", class_="result-con"):
-            print(test.text)
+            print(test.prettify())
             print("SUCCESS")
         if (results != None):
             # print(results.prettify())
