@@ -110,6 +110,10 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 - [] Server
   - [x] Physical server setup
   - [ ] Port Exisiting SQL databse to server
+- [] Potential Future
+  - [] Setup a Web App to interact with the match data
+  - [] Data Analysis on said CS: GO matches
+  - [] Make API public use/setup auth key
 
 
 <!-- CONTRIBUTING -->
