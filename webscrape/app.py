@@ -56,10 +56,10 @@ class HltvScraper():
         # This handles match url and where we get ID
         for link in soup.find_all("a", class_="a-reset"):
             if ('matches' in link.get('href')):
-                # THIS IS THE MATCHURL print(baseurl+link.get('href'))
                 #print(link.get('href'))
                 tempList=link.get('href').split('/')
                 self.idList.append(tempList[2])
+                self.urlList.append(baseurl+link.get('href'))
 
         # This Gets all the match data
         #for test in soup.find_all("div", class_="result-con"):
@@ -72,8 +72,17 @@ class HltvScraper():
         return
 
     def report(self):
+        """
+        @brief a test function where we print out all the data we collect
+        :return:
+        """
+        print("Number of matches:{}".format(self.size))
+        print("ID REPORT:")
         for elem in self.idList:
             print("ID IS :{}".format(elem))
+        print("URL REPORT:")
+        for elem in self.urlList:
+            print("URL IS:{}".format(elem))
         return
 
 
