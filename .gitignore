@@ -34,4 +34,4 @@ build/
 src/main/resources/application.properties
 
 ### WEB SCRAPE PY ###
-webscrape/sample.html
+webscrape/samplepage.html
