@@ -20,7 +20,8 @@ class HltvScraper():
 
     idList =[]
     urlList =[]
-    matchStat = []
+    #dictionary
+    matchStat = {}
 
     def gatherSize(self) -> None:
         """
@@ -42,6 +43,7 @@ class HltvScraper():
         self.size = tempMax
         return
 
+
     # Looking for class result-con
     def processData(self) -> None:
         """
@@ -62,9 +64,9 @@ class HltvScraper():
                 self.urlList.append(baseurl+link.get('href'))
 
         # This Gets all the match data
-        #for test in soup.find_all("div", class_="result-con"):
-        #    print(test.prettify())
-        #    print("SUCCESS")
+        for test in soup.find_all("div", class_="result-con"):
+            print(test.prettify())
+            print("SUCCESS")
         if (results != None):
             # print(results.prettify())
             print(self.page.text)
@@ -91,7 +93,6 @@ class HltvScraper():
         print("Scrape Initiated")
         self.page = requests.get(resulturl)
         self.size = 0
-
         self.processData()
         try:
             self.gatherSize()
@@ -99,5 +100,5 @@ class HltvScraper():
         except:
             print("ERROR")
             return
-        self.report()
+        #self.report()
         print("DONE")
