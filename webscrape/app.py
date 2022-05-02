@@ -53,12 +53,14 @@ class HltvScraper():
         for link in soup.find_all("a", class_="a-reset"):
             if ('matches' in link.get('href')):
                 # THIS IS THE MATCHURL print(baseurl+link.get('href'))
-                break
+                #print(link.get('href'))
+                test=link.get('href').split('/')
+                print(test[2])
 
         # This Gets all the match data
-        for test in soup.find_all("div", class_="result-con"):
-            print(test.prettify())
-            print("SUCCESS")
+        #for test in soup.find_all("div", class_="result-con"):
+        #    print(test.prettify())
+        #    print("SUCCESS")
         if (results != None):
             # print(results.prettify())
             print(self.page.text)
