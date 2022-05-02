@@ -9,6 +9,7 @@ from config import *
 We are gonna need an iterate method once we properly process all the text on one page, size is done though!
 """
 
+
 class HltvScraper():
     """
         resultData = login_form = self.driver.find_elements(by=By.CLASS_NAME,value="result-con")
@@ -46,10 +47,23 @@ class HltvScraper():
         # Result Text
         soup = BeautifulSoup(self.page.content, "html.parser")
         results = soup.find(id="pagination-data")
+
+        # job_elements = soup.find_all("div", class_="result-con")
+        # print(job_elements[0].get('href'))
+        # job_elements = soup.find_all("span", class_="pagination-data")
+        for link in soup.find_all("a", class_="a-reset"):
+            if ('matches' in link.get('href')):
+                # THIS IS THE MATCHURL print(baseurl+link.get('href'))
+                break
+
+        # print(job_elements[0].get('href'))
+        for test in soup.find_all("div", class_="result-con"):
+            print(test.text)
+            print("SUCCESS")
         if (results != None):
             # print(results.prettify())
             print(self.page.text)
-
+        # print(self.page.text)
         return
 
     # Plan is to iterate through all the matches on said page and put into json of info to add to our api!
