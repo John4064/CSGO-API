@@ -6,6 +6,7 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://choosealicense.com/licenses/mit/)
 
 
+
 ## API Reference
 
 #### Get all matches
@@ -55,6 +56,16 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 | :-------- | :------- | :-------------------------------- |
 | `typename`      | `string` | **Required**. Type of match(bo3,bo5) |
 
+#### Get X # of most recent matches
+
+```http
+  GET /api/top/{number}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `number`      | `int` | **Required**. # of matches you want? |
+
 #### Add matches to the database
 
 ```http
@@ -64,7 +75,7 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `HltvMatch`      | `json String` | **Required** Match    |
-```text
+```json
 {   
     "teamA": "32ab",
     "teamB": "bad",
@@ -97,16 +108,28 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
   - [] Automated Webscraping for HLTV Match Data
   - [] Connection to database to upload data
 - [] Server
-  - [] Physical server setup
+  - [x] Physical server setup
+  - [ ] Port Exisiting SQL databse to server
+- [] Potential Future
+  - [] Setup a Web App to interact with the match data
+  - [] Data Analysis on said CS: GO matches
+  - [] Make API public use/setup auth key
 
 
+<!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are always welcome!
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-See `contributing.md` for ways to get started.
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-Please adhere to this project's `code of conduct`.
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
 
 
 ## Support
