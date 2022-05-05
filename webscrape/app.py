@@ -63,14 +63,12 @@ class HltvScraper():
                 self.idList.append(tempList[2])
                 self.urlList.append(baseurl+link.get('href'))
 
-        # This Gets all the match data
+        # This Gets all the match data-For each result-con it iterates
         for test in soup.find_all("div", class_="result-con"):
             #print(test.prettify())
-            #we want class result-score, 
-
+            #we want class result-score,
             print("SUCCESS")
-
-
+            #
 
         if (results != None):
             # print(results.prettify())
