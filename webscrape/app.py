@@ -44,6 +44,10 @@ class HltvScraper():
         return
 
 
+    def gatherIDURL(self)->None:
+
+        return
+
     # Looking for class result-con
     def processData(self) -> None:
         """
@@ -64,16 +68,21 @@ class HltvScraper():
                 self.urlList.append(baseurl+link.get('href'))
 
         # This Gets all the match data-For each result-con it iterates
-        for test in soup.find_all("div", class_="result-con"):
-            #print(test.prettify())
-            #we want class result-score,
-            print("SUCCESS")
-            #
+
+        for matchDiv in soup.find_all("div", class_="result-con"):
+            # we want class event-name, map-text, div team and div team-won for team names
+            # span score-lost,span  score-won
+            #Error Coccuring here only registering first match
+            for test, test1 in zip(soup.find("span", class_="score-lost"), soup.find("span", class_="score-won")):
+                print(test)
+                print(test1)
+
+            print("next match")
+            #break
 
         if (results != None):
             # print(results.prettify())
             print(self.page.text)
-        # print(self.page.text)
         return
 
     def report(self):
