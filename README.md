@@ -1,5 +1,5 @@
 
-# Counter Strike Global Offensive HLTV-Api
+# Counter Strike Global Offensive HLTV-API
 
 A Rest API for CS:GO professional matches through match data gathered by HLTV.
 
@@ -77,14 +77,14 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
 | `HltvMatch`      | `json String` | **Required** Match    |
 ```json
 {   
-    "teamA": "32ab",
-    "teamB": "bad",
-    "url": "ab",
+    "teamA": "fnatic",
+    "teamB": "NIP",
+    "url": "https://hltv.org/results/",
     "competition": "bo3",
     "typeofmatch": "comp",
-    "scoreA": 663,
-    "scoreB": 666,
-    "matchid": 5
+    "scoreA": 2,
+    "scoreB": 1,
+    "matchid": 532323
 } 
 ```
 ## Acknowledgements
