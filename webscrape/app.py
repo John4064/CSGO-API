@@ -74,7 +74,7 @@ class HltvScraper():
             # we want class event-name, map-text, div team and div team-won for team names
             # span score-lost,span  score-won
             #Error Coccuring here only registering first match
-            #print(matchDiv)
+            print(matchDiv)
             iter+=1
             break
         print(iter)
@@ -86,11 +86,11 @@ class HltvScraper():
         print(iter)
 
         iter = 0
-        for teamL, teamW in zip(soup.find_all("div", class_="team"),soup.find_all("div", class_="team team-won")):
-            print("Won: "+teamW.text)
+        for teamL, teamW in zip(soup.find_all("div", class_="line-align team1"),soup.find_all("div", class_="line-align team2")):
+            #print("Won: "+teamW.text)
             #LOST IS WRONG prints both teamW and teamL (check my len of teamL
-            print("Lost: "+teamL.text)
-            print("NEW MATCH")
+            #print("Lost: "+teamL.text)
+            #print("NEW MATCH")
             iter+=1
         print(iter)
         if (results != None):
