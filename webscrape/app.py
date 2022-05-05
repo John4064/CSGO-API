@@ -69,17 +69,31 @@ class HltvScraper():
                 self.urlList.append(baseurl+link.get('href'))
 
         # This Gets all the match data-For each result-con it iterates
-
+        iter=0
         for matchDiv in soup.find_all("div", class_="result-con"):
             # we want class event-name, map-text, div team and div team-won for team names
             # span score-lost,span  score-won
             #Error Coccuring here only registering first match
             #print(matchDiv)
-            print("next match")
-            #break
-        for test, test1 in zip(soup.find_all("span", class_="score-lost"), soup.find_all("span", class_="score-won")):
-            print(test.text)
-            print(test1.text)
+            iter+=1
+            break
+        print(iter)
+        iter=0
+        for scoreL, scoreW in zip(soup.find_all("span", class_="score-lost"), soup.find_all("span", class_="score-won")):
+            #print(scoreL.text)
+            #print(scoreW.text)
+            iter+=1
+        print(iter)
+
+        iter = 0
+        for teamL, teamW in zip(soup.find_all("div", class_="team"),soup.find_all("div", class_="team team-won")):
+            print("Won: "+teamW.text)
+            #LOST IS WRONG
+            print("Lost: "+teamL.text)
+            print("NEW MATCH")
+            iter+=1
+        print(iter)
+
         if (results != None):
             # print(results.prettify())
             print(self.page.text)
