@@ -4,6 +4,7 @@
 from bs4 import BeautifulSoup
 import requests
 from config import *
+from hltvMatch import *
 
 """
 We are gonna need an iterate method once we properly process all the text on one page, size is done though!
@@ -44,6 +45,10 @@ class HltvScraper():
         return
 
 
+    def gatherIDURL(self)->None:
+
+        return
+
     # Looking for class result-con
     def processData(self) -> None:
         """
@@ -63,19 +68,21 @@ class HltvScraper():
                 self.idList.append(tempList[2])
                 self.urlList.append(baseurl+link.get('href'))
 
-        # This Gets all the match data
-        for test in soup.find_all("div", class_="result-con"):
-            #print(test.prettify())
-            #we want class result-score, 
+        # This Gets all the match data-For each result-con it iterates
 
-            print("SUCCESS")
-
-
-
+        for matchDiv in soup.find_all("div", class_="result-con"):
+            # we want class event-name, map-text, div team and div team-won for team names
+            # span score-lost,span  score-won
+            #Error Coccuring here only registering first match
+            #print(matchDiv)
+            print("next match")
+            #break
+        for test, test1 in zip(soup.find_all("span", class_="score-lost"), soup.find_all("span", class_="score-won")):
+            print(test.text)
+            print(test1.text)
         if (results != None):
             # print(results.prettify())
             print(self.page.text)
-        # print(self.page.text)
         return
 
     def report(self):
