@@ -65,8 +65,13 @@ class HltvScraper():
 
         # This Gets all the match data
         for test in soup.find_all("div", class_="result-con"):
-            print(test.prettify())
+            #print(test.prettify())
+            #we want class result-score, 
+
             print("SUCCESS")
+
+
+
         if (results != None):
             # print(results.prettify())
             print(self.page.text)
