@@ -88,12 +88,11 @@ class HltvScraper():
         iter = 0
         for teamL, teamW in zip(soup.find_all("div", class_="team"),soup.find_all("div", class_="team team-won")):
             print("Won: "+teamW.text)
-            #LOST IS WRONG
+            #LOST IS WRONG prints both teamW and teamL (check my len of teamL
             print("Lost: "+teamL.text)
             print("NEW MATCH")
             iter+=1
         print(iter)
-
         if (results != None):
             # print(results.prettify())
             print(self.page.text)
