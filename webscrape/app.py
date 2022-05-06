@@ -56,24 +56,8 @@ class HltvScraper():
 
         return
 
-    # Looking for class result-con
-    def processData(self) -> None:
-        """
-        @brief: Processes the html we scraped off the page!
-        :return: None
-        """
-        # Result Text
-        # job_elements = self.soup.find_all("div", class_="result-con")
 
-        self.gatherIDURL()
-        # This Gets all the match data-For each result-con it iterates
-        iter = 0
-        for matchDiv in self.soup.find_all("div", class_="result-con"):
-            # Error Coccuring here only registering first match
-            # print(matchDiv)
-            # break
-            iter += 1
-        print(iter)
+    def gatherScores(self):
         iter = 0
         for scoreL, scoreW in zip(self.soup.find_all("span", class_="score-lost"),
                                   self.soup.find_all("span", class_="score-won")):
@@ -82,10 +66,24 @@ class HltvScraper():
             iter += 1
         print(iter)
 
+        return
+
+    def gatherTypeEvenet(self):
+        # we want class event-name, map-text,
+        iter = 0
+        for event, match_type in zip(self.soup.find_all("span", class_="event-name"),
+                                     self.soup.find_all("div", class_="map-text")):
+            iter += 1
+            #print(event.text)
+            #print(match_type.text)
+        print(iter)
+
+    def gatherTeams(self):
         iter = 0
         for team1, team2, teamW in zip(self.soup.find_all("div", class_="line-align team1"),
                                        self.soup.find_all("div", class_="line-align team2"),
                                        self.soup.find_all("div", class_="team team-won")):
+            break
             team1 = team1.text.strip()
             team2 = team2.text.strip()
             if (teamW.text == team1):
@@ -97,19 +95,31 @@ class HltvScraper():
                 print("Lost: " + team1)
             print("NEW MATCH")
             iter += 1
-            break
-        print(iter)
-
-        # we want class event-name, map-text,
-        iter = 0
-        for event, match_type in zip(self.soup.find_all("span", class_="event-name"),
-                                     self.soup.find_all("div", class_="map-text")):
-            iter += 1
-            print(event.text)
-            print(match_type.text)
-            
 
         print(iter)
+
+    # Looking for class result-con
+    def processData(self) -> None:
+        """
+        @brief: Processes the html we scraped off the page!
+        :return: None
+        """
+        # Result Text
+        # job_elements = self.soup.find_all("div", class_="result-con")
+
+        self.gatherIDURL()
+
+
+        """
+        #Gather the winning/losing score
+        self.gatherScores()
+
+        #Gathering type of match and competition
+        self.gatherTypeEvenet()
+
+        #Gather winning and losing team!
+        self.gatherTeams()
+        """
 
         return
 
