@@ -19,9 +19,9 @@ class HltvScraper():
             temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']")
             """
 
-    idList =[]
-    urlList =[]
-    #dictionary
+    idList = []
+    urlList = []
+    # dictionary
     matchStat = {}
 
     def gatherSize(self) -> None:
@@ -44,8 +44,15 @@ class HltvScraper():
         self.size = tempMax
         return
 
-
-    def gatherIDURL(self)->None:
+    def gatherIDURL(self) -> None:
+        # This handles match url and where we get ID
+        # Bug located here it gathering ids/urls in latest replays
+        for link in self.soup.find_all("a", class_="a-reset"):
+            if ('matches' in link.get('href')):
+                # print(link.get('href'))
+                tempList = link.get('href').split('/')
+                self.idList.append(tempList[2])
+                self.urlList.append(baseurl + link.get('href'))
 
         return
 
@@ -57,45 +64,51 @@ class HltvScraper():
         """
         # Result Text
         # job_elements = self.soup.find_all("div", class_="result-con")
-        # This handles match url and where we get ID
-        for link in self.soup.find_all("a", class_="a-reset"):
-            if ('matches' in link.get('href')):
-                #print(link.get('href'))
-                tempList=link.get('href').split('/')
-                self.idList.append(tempList[2])
-                self.urlList.append(baseurl+link.get('href'))
 
+        self.gatherIDURL()
         # This Gets all the match data-For each result-con it iterates
-        iter=0
+        iter = 0
         for matchDiv in self.soup.find_all("div", class_="result-con"):
-            # we want class event-name, map-text, div team and div team-won for team names
-            # span score-lost,span  score-won
-            #Error Coccuring here only registering first match
-            #print(matchDiv)
-            iter+=1
-            break
+            # Error Coccuring here only registering first match
+            # print(matchDiv)
+            # break
+            iter += 1
         print(iter)
-        iter=0
-        for scoreL, scoreW in zip(self.soup.find_all("span", class_="score-lost"), self.soup.find_all("span", class_="score-won")):
-            #print(scoreL.text)
-            #print(scoreW.text)
-            iter+=1
+        iter = 0
+        for scoreL, scoreW in zip(self.soup.find_all("span", class_="score-lost"),
+                                  self.soup.find_all("span", class_="score-won")):
+            # print(scoreL.text)
+            # print(scoreW.text)
+            iter += 1
         print(iter)
 
         iter = 0
-        for team1, team2, teamW in zip(self.soup.find_all("div", class_="line-align team1"),self.soup.find_all("div", class_="line-align team2"),self.soup.find_all("div", class_="team team-won")):
-            team1=team1.text.strip()
-            team2=team2.text.strip()
-            if(teamW.text == team1):
-                #Making sure we have the coirrect winning team
+        for team1, team2, teamW in zip(self.soup.find_all("div", class_="line-align team1"),
+                                       self.soup.find_all("div", class_="line-align team2"),
+                                       self.soup.find_all("div", class_="team team-won")):
+            team1 = team1.text.strip()
+            team2 = team2.text.strip()
+            if (teamW.text == team1):
+                # Making sure we have the coirrect winning team
                 print("Won: " + team1)
                 print("Lost: " + team2)
-
             else:
-                print("Won: "+team2)
-                print("Lost: "+team1)
+                print("Won: " + team2)
+                print("Lost: " + team1)
             print("NEW MATCH")
-            iter+=1
+            iter += 1
+            break
+        print(iter)
+
+        # we want class event-name, map-text,
+        iter = 0
+        for event, match_type in zip(self.soup.find_all("span", class_="event-name"),
+                                     self.soup.find_all("div", class_="map-text")):
+            iter += 1
+            print(event.text)
+            print(match_type.text)
+            
+
         print(iter)
 
         return
@@ -114,7 +127,6 @@ class HltvScraper():
             print("URL IS:{}".format(elem))
         return
 
-
     # Plan is to iterate through all the matches on said page and put into json of info to add to our api!
     def __init__(self):
         print("Scrape Initiated")
@@ -129,5 +141,6 @@ class HltvScraper():
         except:
             print("ERROR")
             return
-        #self.report()
+
+        # self.report()
         print("DONE")
