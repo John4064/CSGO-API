@@ -56,12 +56,9 @@ class HltvScraper():
         :return: None
         """
         # Result Text
-        soup = BeautifulSoup(self.page.content, "html.parser")
-        results = soup.find(id="pagination-data")
-
-        # job_elements = soup.find_all("div", class_="result-con")
+        # job_elements = self.soup.find_all("div", class_="result-con")
         # This handles match url and where we get ID
-        for link in soup.find_all("a", class_="a-reset"):
+        for link in self.soup.find_all("a", class_="a-reset"):
             if ('matches' in link.get('href')):
                 #print(link.get('href'))
                 tempList=link.get('href').split('/')
@@ -70,32 +67,37 @@ class HltvScraper():
 
         # This Gets all the match data-For each result-con it iterates
         iter=0
-        for matchDiv in soup.find_all("div", class_="result-con"):
+        for matchDiv in self.soup.find_all("div", class_="result-con"):
             # we want class event-name, map-text, div team and div team-won for team names
             # span score-lost,span  score-won
             #Error Coccuring here only registering first match
-            print(matchDiv)
+            #print(matchDiv)
             iter+=1
             break
         print(iter)
         iter=0
-        for scoreL, scoreW in zip(soup.find_all("span", class_="score-lost"), soup.find_all("span", class_="score-won")):
+        for scoreL, scoreW in zip(self.soup.find_all("span", class_="score-lost"), self.soup.find_all("span", class_="score-won")):
             #print(scoreL.text)
             #print(scoreW.text)
             iter+=1
         print(iter)
 
         iter = 0
-        for teamL, teamW in zip(soup.find_all("div", class_="line-align team1"),soup.find_all("div", class_="line-align team2")):
-            #print("Won: "+teamW.text)
-            #LOST IS WRONG prints both teamW and teamL (check my len of teamL
-            #print("Lost: "+teamL.text)
-            #print("NEW MATCH")
+        for team1, team2, teamW in zip(self.soup.find_all("div", class_="line-align team1"),self.soup.find_all("div", class_="line-align team2"),self.soup.find_all("div", class_="team team-won")):
+            team1=team1.text.strip()
+            team2=team2.text.strip()
+            if(teamW.text == team1):
+                #Making sure we have the coirrect winning team
+                print("Won: " + team1)
+                print("Lost: " + team2)
+
+            else:
+                print("Won: "+team2)
+                print("Lost: "+team1)
+            print("NEW MATCH")
             iter+=1
         print(iter)
-        if (results != None):
-            # print(results.prettify())
-            print(self.page.text)
+
         return
 
     def report(self):
@@ -118,8 +120,10 @@ class HltvScraper():
         print("Scrape Initiated")
         self.page = requests.get(resulturl)
         self.size = 0
+        self.soup = BeautifulSoup(self.page.content, "html.parser")
         self.processData()
         try:
+
             self.gatherSize()
             print("BEEP")
         except:
