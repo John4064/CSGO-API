@@ -49,10 +49,9 @@ class HltvScraper():
         # Bug located here it gathering ids/urls in latest replays
 
         #New Idea
-
         for link in self.soup.find_all("div",class_="results-sublist"):
             print(link)
-            #First link is latest replays
+            #First link is latest replays that we want to avoid!
 
 
             print("NEW LINK")
