@@ -47,13 +47,34 @@ class HltvScraper():
     def gatherIDURL(self) -> None:
         # This handles match url and where we get ID
         # Bug located here it gathering ids/urls in latest replays
-        for link in self.soup.find_all("a", class_="a-reset"):
-            if ('matches' in link.get('href')):
-                # print(link.get('href'))
-                tempList = link.get('href').split('/')
-                self.idList.append(tempList[2])
-                self.urlList.append(baseurl + link.get('href'))
 
+        #New Idea
+
+        for link in self.soup.find_all("div",class_="results-sublist"):
+            print(link)
+            #First link is latest replays
+
+
+            print("NEW LINK")
+
+        print(len(self.urlList))
+
+
+
+        """
+        for link in self.soup.find_all("a", class_="a-reset"):
+            if(1):
+                if ('matches' in link.get('href')):
+                    # print(link.get('href'))
+                    tempList = link.get('href').split('/')
+                    self.idList.append(tempList[2])
+                    self.urlList.append(baseurl + link.get('href'))
+                    print(link.get('href'))
+
+        self.urlList=self.urlList[0:100]
+        print(len(self.urlList))
+        print(self.urlList[-1])
+        """
         return
 
 
@@ -145,9 +166,7 @@ class HltvScraper():
         self.soup = BeautifulSoup(self.page.content, "html.parser")
         self.processData()
         try:
-
             self.gatherSize()
-            print("BEEP")
         except:
             print("ERROR")
             return
