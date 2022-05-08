@@ -12,12 +12,6 @@ We are gonna need an iterate method once we properly process all the text on one
 
 
 class HltvScraper():
-    """
-        resultData = login_form = self.driver.find_elements(by=By.CLASS_NAME,value="result-con")
-
-        for element in resultData:
-            temp = element.find_element(by=By.XPATH,value=".//a[@class='a-reset']")
-            """
 
     idList = []
     urlList = []
@@ -47,33 +41,32 @@ class HltvScraper():
     def gatherIDURL(self) -> None:
         # This handles match url and where we get ID
         # Bug located here it gathering ids/urls in latest replays
+        iter=0
 
+        subList = self.soup.find_all("div", class_="results-sublist")
         #New Idea
-        for link in self.soup.find_all("div",class_="results-sublist"):
-            print(link)
-            #First link is latest replays that we want to avoid!
+
+
+        #REFACTOR AAND PROPERLY NAME SUBLIST, RESULT LIST, RESULT, TAG, HEADER!!!!!
+        for resultList in subList:
+            result = resultList.find_all("div",class_="result-con")
+            for tag in result:
+                header = tag.find("a",class_="a-reset")
+                print(header.get('href'))
+                """
+                tempList = link.get('href').split('/')
+                    self.idList.append(tempList[2])
+                    self.urlList.append(baseurl + link.get('href'))
+                    """
+                iter += 1
+            #THIS GETS ALL MATCH DATA WE NOPW NEED TO FIND A CLASS A-reset
 
 
             print("NEW LINK")
+        print(iter)
+        #print(len(self.urlList))
 
-        print(len(self.urlList))
 
-
-
-        """
-        for link in self.soup.find_all("a", class_="a-reset"):
-            if(1):
-                if ('matches' in link.get('href')):
-                    # print(link.get('href'))
-                    tempList = link.get('href').split('/')
-                    self.idList.append(tempList[2])
-                    self.urlList.append(baseurl + link.get('href'))
-                    print(link.get('href'))
-
-        self.urlList=self.urlList[0:100]
-        print(len(self.urlList))
-        print(self.urlList[-1])
-        """
         return
 
 
