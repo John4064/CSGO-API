@@ -210,7 +210,7 @@ class HltvScraper():
             return
         #Put into objects
         self.putObj()
-
+        
 
         #self.report()
         print("DONE")
