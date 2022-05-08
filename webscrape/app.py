@@ -24,8 +24,8 @@ class HltvScraper():
     compEvent = []
     matchType = []
 
-    # dictionary
-    matchStat = {}
+    #List of hltvmatch objects
+    matchList = []
 
     def gatherSize(self) -> None:
         """
@@ -33,8 +33,7 @@ class HltvScraper():
         Sets self.size\n
         :return: None
         """
-        soup = BeautifulSoup(self.page.content, "html.parser")
-        job_elements = soup.find_all("span", class_="pagination-data")
+        job_elements = self.soup.find_all("span", class_="pagination-data")
         # CLEAN THIS UP SLOPPY
         for job_element in job_elements:
             data = job_element.text.split(" ")
@@ -117,7 +116,7 @@ class HltvScraper():
                 # print("Lost: " + team1)
 
     # Looking for class result-con
-    def processData(self) -> None:
+    def processData(self, urlList: List[str]) -> None:
         """
         @brief: Processes the html we scraped off the page!
         :return: None
@@ -185,6 +184,16 @@ class HltvScraper():
             urls.append(offsetUrl.format(num))
         return urls
 
+    def putObj(self):
+        #Replace with size after testing
+
+        for iter in range(100):
+            temp= hltvMatch(self.idList[iter],self.urlList[iter],self.teamA[iter],self.teamB[iter],self.scoreA[iter],
+                            self.scoreB[iter],self.compEvent[iter],self.matchType[iter])
+            self.matchList.append(temp)
+
+        return
+
     # Plan is to iterate through all the matches on said page and put into json of info to add to our api!
     def __init__(self):
         print("Scrape Initiated")
@@ -192,12 +201,17 @@ class HltvScraper():
         self.size = 0
         self.soup = BeautifulSoup(self.page.content, "html.parser")
         try:
-            #self.processData()
+            #
             self.gatherSize()
+            urlList=self.urlGenerator()
+            self.processData(urlList)
         except:
             print("ERROR OVERALL")
             return
-        for page in self.urlGenerator():
-            print(page)
+        #Put into objects
+        self.putObj()
+        self.matchList[99].printAttr()
+
+
         #self.report()
         print("DONE")
