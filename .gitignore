@@ -36,3 +36,4 @@ src/main/resources/application.properties
 ### WEB SCRAPE PY ###
 webscrape/samplepage.html
 webscrape/scratch.html
+webscrape\__pycache__\
