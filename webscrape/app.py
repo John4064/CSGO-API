@@ -193,10 +193,10 @@ class HltvScraper():
 
         print(len(self.idList))
         print(len(self.urlList))
-        print(len(self.teamA))
-        print(len(self.teamB))
-        print(len(self.scoreA))
-        print(len(self.scoreB))
+        print(len(self.teamA)) #wrong
+        print(len(self.teamB))#wrong
+        print(len(self.scoreA))#wrong
+        print(len(self.scoreB))#wrong
         print(len(self.compEvent))
         print(len(self.matchType))
         for iter in range(self.size):
