@@ -37,3 +37,6 @@ src/main/resources/application.properties
 webscrape/samplepage.html
 webscrape/scratch.html
 webscrape\__pycache__\
+webscrape/__pycache__/app.cpython-310.pyc
+webscrape/__pycache__/config.cpython-310.pyc
+webscrape/__pycache__/hltvMatch.cpython-310.pyc

@@ -121,29 +121,35 @@ class HltvScraper():
         @brief: Processes the html we scraped off the page!
         :return: None
         """
-        try:
-            # Gather id/url of match
-            self.gatherIDURL()
-        except:
-            print("ERROR OCCURRED GATHERING ID/URL")
+        #(len(urlList)
+        for x in range(1):
+            print("Progress {}%".format(round(100*(x*100)/self.size,2)))
+            #self.page = requests.get(urlList[x])
+            self.page = requests.get(resulturl)
+            self.soup = BeautifulSoup(self.page.content, "html.parser")
+            try:
+                # Gather id/url of match
+                self.gatherIDURL()
+            except:
+                print("ERROR OCCURRED GATHERING ID/URL")
 
-        try:
-            # Gather the winning/losing score
-            self.gatherScores()
-        except:
-            print("ERROR OCCURRED GATHERING SCORES")
+            try:
+                # Gather the winning/losing score
+                self.gatherScores()
+            except:
+                print("ERROR OCCURRED GATHERING SCORES")
 
-        try:
-            # Gathering type of match and competition
-            self.gatherTypeEvent()
-        except:
-            print("ERROR OCCURRED IN  GATHERING COMPETITION/TYPE")
+            try:
+                # Gathering type of match and competition
+                self.gatherTypeEvent()
+            except:
+                print("ERROR OCCURRED IN  GATHERING COMPETITION/TYPE")
 
-        try:
-            # Gather winning and losing team!
-            self.gatherTeams()
-        except:
-            print("ERROR OCCURRED IN GATHERING TEAMS")
+            try:
+                # Gather winning and losing team!
+                self.gatherTeams()
+            except:
+                print("ERROR OCCURRED IN GATHERING TEAMS")
         return
 
     def report(self):
@@ -187,12 +193,22 @@ class HltvScraper():
     def putObj(self):
         #Replace with size after testing
 
-        for iter in range(100):
+        print(len(self.idList))
+        print(len(self.urlList))
+        print(len(self.teamA)) #wrong
+        print(len(self.teamB))#wrong
+        print(len(self.scoreA))#wrong
+        print(len(self.scoreB))#wrong
+        print(len(self.compEvent))
+        print(len(self.matchType))
+        for iter in range(116):
             temp= hltvMatch(self.idList[iter],self.urlList[iter],self.teamA[iter],self.teamB[iter],self.scoreA[iter],
                             self.scoreB[iter],self.compEvent[iter],self.matchType[iter])
             self.matchList.append(temp)
 
         return
+
+
 
     # Plan is to iterate through all the matches on said page and put into json of info to add to our api!
     def __init__(self):
@@ -211,6 +227,13 @@ class HltvScraper():
         #Put into objects
         self.putObj()
 
+        print(len(self.matchList))
 
+        #self.matchList[0].printAttr()
+        #self.matchList[50].printAttr()
+        #self.matchList[self.size-1].printAttr()
+        #First # 420th #last
+        for x in range(len(self.matchList)):
+            self.matchList[x].printAttr()
         #self.report()
         print("DONE")
