@@ -87,6 +87,9 @@ A Rest API for CS:GO professional matches through match data gathered by HLTV.
     "matchid": 532323
 } 
 ```
+
+## Web Scraping
+The second aspect of this project is the web scraping script to gather all potential matches on hltv.org/results. Check the webscrape directory to properly view that code. More documentation/tests on the process in the near future.
 ## Acknowledgements
 
  - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
