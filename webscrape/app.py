@@ -122,10 +122,10 @@ class HltvScraper():
         :return: None
         """
         #(len(urlList)
-        for x in range(1):
+        for x in range(len(urlList)):
             print("Progress {}%".format(round(100*(x*100)/self.size,2)))
-            #self.page = requests.get(urlList[x])
-            self.page = requests.get(resulturl)
+            self.page = requests.get(urlList[x])
+            #self.page = requests.get(resulturl)
             self.soup = BeautifulSoup(self.page.content, "html.parser")
             try:
                 # Gather id/url of match
@@ -201,7 +201,7 @@ class HltvScraper():
         print(len(self.scoreB))#wrong
         print(len(self.compEvent))
         print(len(self.matchType))
-        for iter in range(116):
+        for iter in range(self.size):
             temp= hltvMatch(self.idList[iter],self.urlList[iter],self.teamA[iter],self.teamB[iter],self.scoreA[iter],
                             self.scoreB[iter],self.compEvent[iter],self.matchType[iter])
             self.matchList.append(temp)
@@ -217,8 +217,7 @@ class HltvScraper():
         self.size = 0
         self.soup = BeautifulSoup(self.page.content, "html.parser")
         try:
-            #
-            self.gatherSize()
+            self.gatherSize()\
             urlList=self.urlGenerator()
             self.processData(urlList)
         except:
