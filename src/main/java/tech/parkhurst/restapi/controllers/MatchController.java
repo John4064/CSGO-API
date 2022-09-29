@@ -60,13 +60,13 @@ public class MatchController {
 
 
     @GetMapping("/error")
-    public ResponseEntity catchError(){
-        return ResponseEntity.ok().body("Error has Occured");
+    public ResponseEntity<String> catchError(){
+        return ResponseEntity.ok().body("Error has occurred");
     }
 
 
     @RequestMapping("*")
-    public ResponseEntity catchAll(){
+    public ResponseEntity<String> catchAll(){
         //Catch any unspecified endpoints
         return ResponseEntity.ok().body("This End Point does not Exist!");
     }
