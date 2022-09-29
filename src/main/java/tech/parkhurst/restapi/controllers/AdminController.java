@@ -1,7 +1,5 @@
 package tech.parkhurst.restapi.controllers;
 
-
-import org.apache.catalina.UserDatabase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import tech.parkhurst.restapi.entities.HltvMatch;
 import tech.parkhurst.restapi.exceptions.MatchIdFoundException;
 import tech.parkhurst.restapi.exceptions.MatchNotfoundException;
 import tech.parkhurst.restapi.services.MatchServices;
-import tech.parkhurst.restapi.exceptions.MatchIdFoundException;
 
 
 @RestController
