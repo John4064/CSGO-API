@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import requests
 from config import *
 from hltvMatch import *
-
+import logging as log
 """
 We are gonna need an iterate method once we properly process all the text on one page, size is done though!
 """
@@ -186,6 +186,7 @@ class HltvScraper():
         """
         urls=[]
         numPages=self.size/100
+        self.size=4000
         for num in range(0,self.size,100):
             urls.append(offsetUrl.format(num))
         return urls
@@ -201,6 +202,7 @@ class HltvScraper():
         print(len(self.scoreB))#wrong
         print(len(self.compEvent))
         print(len(self.matchType))
+        log.info("Beginning Merging Data to Objects")
         for iter in range(self.size):
             temp= hltvMatch(self.idList[iter],self.urlList[iter],self.teamA[iter],self.teamB[iter],self.scoreA[iter],
                             self.scoreB[iter],self.compEvent[iter],self.matchType[iter])
@@ -226,6 +228,7 @@ class HltvScraper():
         #Put into objects
         self.putObj()
 
+        print("MATCH LENGTH")
         print(len(self.matchList))
 
         #self.matchList[0].printAttr()
