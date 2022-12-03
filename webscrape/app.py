@@ -7,6 +7,8 @@ import requests
 from config import *
 from hltvMatch import *
 import logging as log
+import json
+
 """
 We are gonna need an iterate method once we properly process all the text on one page, size is done though!
 """
@@ -186,7 +188,6 @@ class HltvScraper():
         """
         urls=[]
         numPages=self.size/100
-        self.size=4000
         for num in range(0,self.size,100):
             urls.append(offsetUrl.format(num))
         return urls
@@ -210,6 +211,13 @@ class HltvScraper():
 
         return
 
+    def uploadToDatabase(self) -> None:
+        for match in self.matchList:
+            url = 'localhost:8080/api/findall'
+            test = json.dumps(match)
+            print(test)
+            #x = requests.post(url, json=myobj)
+        return
 
 
     # Plan is to iterate through all the matches on said page and put into json of info to add to our api!
@@ -219,7 +227,9 @@ class HltvScraper():
         self.size = 0
         self.soup = BeautifulSoup(self.page.content, "html.parser")
         try:
-            self.gatherSize()
+            #self.gatherSize()
+            self.size = 100  #Error starts at 4000
+
             urlList=self.urlGenerator()
             self.processData(urlList)
         except:
@@ -228,14 +238,9 @@ class HltvScraper():
         #Put into objects
         self.putObj()
 
-        print("MATCH LENGTH")
-        print(len(self.matchList))
-
-        #self.matchList[0].printAttr()
-        #self.matchList[50].printAttr()
-        #self.matchList[self.size-1].printAttr()
-        #First # 420th #last
+        log.info("Match Length: ",len(self.matchList))
         for x in range(len(self.matchList)):
             self.matchList[x].printAttr()
         #self.report()
+        self.uploadToDatabase()
         print("DONE")
