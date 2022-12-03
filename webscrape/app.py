@@ -213,10 +213,17 @@ class HltvScraper():
 
     def uploadToDatabase(self) -> None:
         for match in self.matchList:
-            url = 'localhost:8080/api/findall'
-            test = json.dumps(match)
-            print(test)
-            #x = requests.post(url, json=myobj)
+            # url = 'localhost:8080/admin/add/'
+            # jsonMatchData = json.dumps(match.__dict__)
+            # response = requests.post(url, json=jsonMatchData)
+            try:
+                url = 'http://localhost:8080/admin/add/'
+                jsonMatchData = json.dumps(match.__dict__)
+                print(jsonMatchData)
+                #response = requests.post(url, json=jsonMatchData)
+            except:
+                log.error("Error Occured On Post Request")
+
         return
 
 
