@@ -108,8 +108,8 @@ The second aspect of this project is the web scraping script to gather all poten
   - [x] Advanced Match Breakdown
   - [x] Documentation Completion
 - [] Automation
-  - [] Automated Webscraping for HLTV Match Data
-  - [] Connection to database to upload data
+  - [x] Automated Webscraping for HLTV Match Data
+  - [x] Connection to database to upload data
 - [] Server
   - [x] Physical server setup
   - [ ] Port Exisiting SQL databse to server
@@ -118,7 +118,8 @@ The second aspect of this project is the web scraping script to gather all poten
   - [] Data Analysis on said CS: GO matches
   - [] Make API public use/setup auth key
 
-
+## Setup & Getting Started
+dasda
 <!-- CONTRIBUTING -->
 ## Contributing
 
