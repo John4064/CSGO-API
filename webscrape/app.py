@@ -7,6 +7,9 @@ import requests
 from config import *
 from hltvMatch import *
 import logging as log
+import json
+import http.client
+
 """
 We are gonna need an iterate method once we properly process all the text on one page, size is done though!
 """
@@ -24,7 +27,7 @@ class HltvScraper():
     compEvent = []
     matchType = []
 
-    #List of hltvmatch objects
+    # List of hltvmatch objects
     matchList = []
 
     def gatherSize(self) -> None:
@@ -80,8 +83,6 @@ class HltvScraper():
             self.scoreA.append(scoreW.text)
             self.scoreB.append(scoreL.text)
 
-
-
         return
 
     def gatherTypeEvent(self):
@@ -121,11 +122,10 @@ class HltvScraper():
         @brief: Processes the html we scraped off the page!
         :return: None
         """
-        #(len(urlList)
         for x in range(len(urlList)):
-            print("Progress {}%".format(round(100*(x*100)/self.size,2)))
+            print("Progress {}%".format(round(100 * (x * 100) / self.size, 2)))
             self.page = requests.get(urlList[x])
-            #self.page = requests.get(resulturl)
+            # self.page = requests.get(resulturl)
             self.soup = BeautifulSoup(self.page.content, "html.parser")
             try:
                 # Gather id/url of match
@@ -164,18 +164,18 @@ class HltvScraper():
         print("({})URL REPORT:".format(len(self.urlList)))
         for elem in self.urlList:
             print("URL IS:{}".format(elem))
-        print("({},{})TEAM REPORT:".format(len(self.teamA),len(self.teamB)))
+        print("({},{})TEAM REPORT:".format(len(self.teamA), len(self.teamB)))
         for i in range(len(self.teamA)):
             print("Winning Team IS:{}".format(self.teamA[i]))
             print("Losing Team IS:{}".format(self.teamB[i]))
-        print("({},{})Score Report:".format(len(self.scoreA),len(self.scoreB)))
+        print("({},{})Score Report:".format(len(self.scoreA), len(self.scoreB)))
         for x in range(len(self.scoreA)):
             print("Winning Score IS:{}".format(self.scoreA[x]))
             print("Losing Score IS:{}".format(self.scoreB[x]))
         print("({},{})Event/Type Report:".format(len(self.compEvent), len(self.matchType)))
-        for event,type in zip(self.compEvent,self.matchType):
-            print("The event is: "+event)
-            print("The Match type is: "+type)
+        for event, type in zip(self.compEvent, self.matchType):
+            print("The event is: " + event)
+            print("The Match type is: " + type)
 
         return
 
@@ -184,33 +184,51 @@ class HltvScraper():
         Generate all potential urls we need to scrape
         :return: A string array of all potential hltv.org results based on max size on page 1
         """
-        urls=[]
-        numPages=self.size/100
-        self.size=4000
-        for num in range(0,self.size,100):
+        urls = []
+        numPages = self.size / 100
+        for num in range(0, self.size, 100):
             urls.append(offsetUrl.format(num))
         return urls
 
     def putObj(self):
-        #Replace with size after testing
-
-        print(len(self.idList))
-        print(len(self.urlList))
-        print(len(self.teamA)) #wrong
-        print(len(self.teamB))#wrong
-        print(len(self.scoreA))#wrong
-        print(len(self.scoreB))#wrong
-        print(len(self.compEvent))
-        print(len(self.matchType))
+        # Replace with size after testing
+        # Debuging
+        # print(len(self.idList))
+        # print(len(self.teamA)) #wrong
+        # print(len(self.teamB))#wrong
+        # print(len(self.scoreA))#wrong
+        # print(len(self.scoreB))#wrong
         log.info("Beginning Merging Data to Objects")
         for iter in range(self.size):
-            temp= hltvMatch(self.idList[iter],self.urlList[iter],self.teamA[iter],self.teamB[iter],self.scoreA[iter],
-                            self.scoreB[iter],self.compEvent[iter],self.matchType[iter])
+            temp = hltvMatch(self.idList[iter], self.urlList[iter], self.teamA[iter], self.teamB[iter],
+                             self.scoreA[iter],
+                             self.scoreB[iter], self.compEvent[iter], self.matchType[iter])
             self.matchList.append(temp)
-
         return
 
+    def uploadToDatabase(self) -> None:
+        """
+        Uploads all matchs we gather to the db through the api component
+        :return: None
+        """
+        url = 'http://localhost:8080/admin/add/'
+        headersD = {'Content-type': 'application/json'}
+        conn = http.client.HTTPConnection('localhost', 8080)
+        for match in self.matchList:
+            try:
+                jsonMatchData = json.dumps(match.__dict__)
+                conn.request("POST", "/admin/add/", jsonMatchData, headers=headersD)
+                response = conn.getresponse()
+                response.read()
+                if response.status != 200:
+                    log.error(response.status)
+                    log.error(response.reason)
+                else:
+                    print("Successful Upload ", match.getMatchId())
+            except (RuntimeError, TypeError, NameError):
+                log.error("Error Occurred On Post Request")
 
+        return
 
     # Plan is to iterate through all the matches on said page and put into json of info to add to our api!
     def __init__(self):
@@ -219,23 +237,16 @@ class HltvScraper():
         self.size = 0
         self.soup = BeautifulSoup(self.page.content, "html.parser")
         try:
-            self.gatherSize()
-            urlList=self.urlGenerator()
+            # self.gatherSize()
+            self.size = 3000  # Error starts at 4000
+            urlList = self.urlGenerator()
             self.processData(urlList)
         except:
             print("ERROR OVERALL")
             return
-        #Put into objects
+        # Put  into objects
         self.putObj()
-
-        print("MATCH LENGTH")
-        print(len(self.matchList))
-
-        #self.matchList[0].printAttr()
-        #self.matchList[50].printAttr()
-        #self.matchList[self.size-1].printAttr()
-        #First # 420th #last
-        for x in range(len(self.matchList)):
-            self.matchList[x].printAttr()
-        #self.report()
+        log.debug("Match Length: ", len(self.matchList))
+        # self.report()
+        self.uploadToDatabase()
         print("DONE")

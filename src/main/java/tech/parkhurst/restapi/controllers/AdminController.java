@@ -1,5 +1,6 @@
 package tech.parkhurst.restapi.controllers;
 
+import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,11 @@ public class AdminController {
 
     static Logger log = LogManager.getLogger(AdminController.class.getName());
 
-    @PostMapping(value = "/add/", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public ResponseEntity<HltvMatch> addUser(@RequestBody HltvMatch match) {
         //Check if match id exists if it does throw
+        System.out.println(match);
+        log.info("a");
         try{
             HltvMatch checkM = this.services.getMatchById(match.getMatchid());
             if(checkM==null){
@@ -36,7 +39,8 @@ public class AdminController {
                 throw new MatchIdFoundException();
             }
         }catch(MatchNotfoundException excep){
-            log.error("Adding a new match!");
+            log.info("Adding a new match!");
+
             return ResponseEntity.ok(this.services.createMatch(match));
         }
 

@@ -7,7 +7,7 @@ import tech.parkhurst.restapi.entities.HltvMatch;
 
 import java.util.List;
 
-public interface MatchRepo extends JpaRepository<HltvMatch, Integer> {
+public interface MatchRepo extends JpaRepository<HltvMatch, String> {
 
     List<HltvMatch> findByTypeofmatchIgnoreCase(String typeofmatch);
 

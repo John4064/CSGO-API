@@ -13,18 +13,18 @@ public class HltvMatchDTO {
 
     private String typeofmatch;
 
-    private int matchid;
+    private String matchid;
 
-    private int scoreA;
+    private String scoreA;
 
-    private int scoreB;
+    private String scoreB;
 
     //Accessors
-    public int getScoreA() {
+    public String getScoreA() {
         return scoreA;
     }
 
-    public int getScoreB() {
+    public String getScoreB() {
         return scoreB;
     }
 
@@ -32,7 +32,7 @@ public class HltvMatchDTO {
         return competition;
     }
 
-    public int getMatchid() {
+    public String getMatchid() {
         return matchid;
     }
 

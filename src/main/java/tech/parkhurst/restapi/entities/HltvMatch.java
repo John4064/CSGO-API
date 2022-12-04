@@ -1,10 +1,26 @@
 package tech.parkhurst.restapi.entities;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
-
 @Entity
-@Table(name = "hltv_match", schema = "csgo_hltv")
+@Table(name = "hltv_match", schema = "csgodata")
 public class HltvMatch {
+
+    public HltvMatch(){
+    }
+    @JsonCreator
+    public HltvMatch(@JsonProperty("matchid") String matchid, @JsonProperty("teamA") String teamA,@JsonProperty("teamB") String teamB,@JsonProperty("url") String url,@JsonProperty("scoreA") String scoreA,@JsonProperty("scoreB") String scoreB,@JsonProperty("competition") String competition,@JsonProperty("typeofmatch") String typeofmatch) {
+        this.matchid=matchid;
+        this.teamA=teamA;
+        this.teamB=teamB;
+        this.url=url;
+        this.competition=competition;
+        this.typeofmatch=typeofmatch;
+        this.scoreA=scoreA;
+        this.scoreB=scoreB;
+    }
 
     @Column(name="team_A")
     private String teamA;
@@ -23,20 +39,20 @@ public class HltvMatch {
 
     @Id
     @Column(name="match_id")
-    private int matchid;
+    private String matchid;
 
     @Column(name="score_tA")
-    private int scoreA;
+    private String scoreA;
 
     @Column(name="score_tB")
-    private int scoreB;
+    private String scoreB;
 
     //Accessors
-    public int getScoreA() {
+    public String getScoreA() {
         return scoreA;
     }
 
-    public int getScoreB() {
+    public String getScoreB() {
         return scoreB;
     }
 
@@ -44,7 +60,7 @@ public class HltvMatch {
         return competition;
     }
 
-    public int getMatchid() {
+    public String getMatchid() {
         return matchid;
     }
 

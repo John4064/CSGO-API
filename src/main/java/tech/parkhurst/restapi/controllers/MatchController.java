@@ -23,7 +23,7 @@ public class MatchController {
     }
 
     @GetMapping("/match/{id}")
-    public ResponseEntity<HltvMatch> getMatchById(@PathVariable int id) {
+    public ResponseEntity<HltvMatch> getMatchById(@PathVariable String id) {
         HltvMatch specMatch = this.services.getMatchById(id);
         if(specMatch != null){
             return ResponseEntity.ok().body(specMatch);

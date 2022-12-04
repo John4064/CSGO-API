@@ -1,25 +1,25 @@
 class hltvMatch:
-    matchId = 0
+    matchid = 0
     url = ""
     teamA = ""
     teamB = ""
     scoreA = 0
     scoreB = 0
     competition = ""
-    matchtype = ""
+    typeofmatch = ""
 
-    def __init__(self, matchId, url, teamA, teamB, score_A, score_B, competiton, type):
-        self.matchId = matchId
+    def __init__(self, matchid, url, teamA, teamB, score_A, score_B, competiton, type):
+        self.matchid = matchid
         self.url = url
         self.teamA = teamA
         self.teamB = teamB
         self.scoreA = score_A
         self.scoreB = score_B
         self.competition = competiton
-        self.matchtype = type
+        self.typeofmatch = type
 
     def setId(self, matchId):
-        self.matchId = matchId
+        self.matchid = matchId
 
     def setUrl(self, url):
         self.url = url
@@ -40,10 +40,12 @@ class hltvMatch:
         self.competition = comp
 
     def setmatchType(self, type):
-        self.matchtype = type
+        self.typeofmatch = type
 
+    def getMatchId(self)-> str:
+        return self.matchid
     def printAttr(self):
         print(
-            "The Attributes are: {}, {}, {}, {}, {}, {}, {}, {}".format(self.url, self.teamA, self.teamB, self.matchId,
-                                                                        self.matchtype, self.competition, self.scoreA,
+            "The Attributes are: {}, {}, {}, {}, {}, {}, {}, {}".format(self.url, self.teamA, self.teamB, self.matchid,
+                                                                        self.typeofmatch, self.competition, self.scoreA,
                                                                         self.scoreB))
