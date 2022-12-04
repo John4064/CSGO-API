@@ -8,6 +8,7 @@ from config import *
 from hltvMatch import *
 import logging as log
 import json
+import http.client
 
 """
 We are gonna need an iterate method once we properly process all the text on one page, size is done though!
@@ -123,7 +124,6 @@ class HltvScraper():
         @brief: Processes the html we scraped off the page!
         :return: None
         """
-        #(len(urlList)
         for x in range(len(urlList)):
             print("Progress {}%".format(round(100*(x*100)/self.size,2)))
             self.page = requests.get(urlList[x])
@@ -194,35 +194,40 @@ class HltvScraper():
 
     def putObj(self):
         #Replace with size after testing
-
-        print(len(self.idList))
-        print(len(self.urlList))
-        print(len(self.teamA)) #wrong
-        print(len(self.teamB))#wrong
-        print(len(self.scoreA))#wrong
-        print(len(self.scoreB))#wrong
-        print(len(self.compEvent))
-        print(len(self.matchType))
+        #Debuging
+        # print(len(self.idList))
+        # print(len(self.teamA)) #wrong
+        # print(len(self.teamB))#wrong
+        # print(len(self.scoreA))#wrong
+        # print(len(self.scoreB))#wrong
         log.info("Beginning Merging Data to Objects")
         for iter in range(self.size):
             temp= hltvMatch(self.idList[iter],self.urlList[iter],self.teamA[iter],self.teamB[iter],self.scoreA[iter],
                             self.scoreB[iter],self.compEvent[iter],self.matchType[iter])
             self.matchList.append(temp)
-
         return
 
     def uploadToDatabase(self) -> None:
+        """
+        Uploads all matchs we gather to the db through the api component
+        :return: None
+        """
+        url = 'http://localhost:8080/admin/add/'
+        headersD = {'Content-type': 'application/json'}
+        conn = http.client.HTTPConnection('localhost', 8080)
         for match in self.matchList:
-            # url = 'localhost:8080/admin/add/'
-            # jsonMatchData = json.dumps(match.__dict__)
-            # response = requests.post(url, json=jsonMatchData)
             try:
-                url = 'http://localhost:8080/admin/add/'
                 jsonMatchData = json.dumps(match.__dict__)
-                print(jsonMatchData)
-                #response = requests.post(url, json=jsonMatchData)
-            except:
-                log.error("Error Occured On Post Request")
+                conn.request("POST","/admin/add/", jsonMatchData,headers=headersD)
+                response=conn.getresponse()
+                response.read()
+                if response.status != 200:
+                    log.error(response.status)
+                    log.error(response.reason)
+                else:
+                    print("Successful Upload {}",match.getMatchId())
+            except (RuntimeError, TypeError, NameError):
+                log.error("Error Occurred On Post Request")
 
         return
 
@@ -235,19 +240,15 @@ class HltvScraper():
         self.soup = BeautifulSoup(self.page.content, "html.parser")
         try:
             #self.gatherSize()
-            self.size = 100  #Error starts at 4000
-
+            self.size = 3000  #Error starts at 4000
             urlList=self.urlGenerator()
             self.processData(urlList)
         except:
             print("ERROR OVERALL")
             return
-        #Put into objects
+        #Put  into objects
         self.putObj()
-
-        log.info("Match Length: ",len(self.matchList))
-        for x in range(len(self.matchList)):
-            self.matchList[x].printAttr()
+        log.debug("Match Length: ",len(self.matchList))
         #self.report()
-        self.uploadToDatabase()
+        #self.uploadToDatabase()
         print("DONE")

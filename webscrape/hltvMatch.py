@@ -42,6 +42,8 @@ class hltvMatch:
     def setmatchType(self, type):
         self.typeofmatch = type
 
+    def getMatchId(self)-> str:
+        return self.matchid
     def printAttr(self):
         print(
             "The Attributes are: {}, {}, {}, {}, {}, {}, {}, {}".format(self.url, self.teamA, self.teamB, self.matchid,
