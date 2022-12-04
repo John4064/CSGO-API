@@ -225,7 +225,7 @@ class HltvScraper():
                     log.error(response.status)
                     log.error(response.reason)
                 else:
-                    print("Successful Upload {}",match.getMatchId())
+                    print("Successful Upload ",match.getMatchId())
             except (RuntimeError, TypeError, NameError):
                 log.error("Error Occurred On Post Request")
 
@@ -250,5 +250,5 @@ class HltvScraper():
         self.putObj()
         log.debug("Match Length: ",len(self.matchList))
         #self.report()
-        #self.uploadToDatabase()
+        self.uploadToDatabase()
         print("DONE")
