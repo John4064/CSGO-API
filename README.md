@@ -119,11 +119,12 @@ The second aspect of this project is the web scraping script to gather all poten
   - [] Data Analysis on said CS: GO matches
   - [] Make API public use/setup auth key
 
-## Setup & Getting Started
+# Setup & Getting Started
 
 Check example configs folder for example MySql commands to replicate the database being used as well as a basic application.properties needed for the api to function.
 If you would like to run locally follow these instructions.
-# Steps
+
+## Steps
 1. First set up a mysql database, create a default empty table with the command listed in the example-configs.
 2. Next modify the apis application-properties providing springboot with the necessary configurations fielded with the username, password, and server IP.
 3. Then run the spring boot api making sure it is up and running.
