@@ -108,18 +108,32 @@ The second aspect of this project is the web scraping script to gather all poten
   - [x] Advanced Match Breakdown
   - [x] Documentation Completion
 - [] Automation
-  - [x] Automated Webscraping for HLTV Match Data
+  - [x] Automated Web scraping for HLTV Match Data
   - [x] Connection to database to upload data
+  - [] Bug fix error regarding incomplete data for 2% of matches
 - [] Server
   - [x] Physical server setup
-  - [ ] Port Exisiting SQL databse to server
+  - [] Port Existing SQL database to server
 - [] Potential Future
   - [] Setup a Web App to interact with the match data
   - [] Data Analysis on said CS: GO matches
   - [] Make API public use/setup auth key
 
 ## Setup & Getting Started
-dasda
+
+Check example configs folder for example MySql commands to replicate the database being used as well as a basic application.properties needed for the api to function.
+If you would like to run locally follow these instructions.
+# Steps
+1. First set up a mysql database, create a default empty table with the command listed in the example-configs.
+2. Next modify the apis application-properties providing springboot with the necessary configurations fielded with the username, password, and server IP.
+3. Then run the spring boot api making sure it is up and running.
+4. Next execute the web scraping script found in the web scrape folder make sure to specify the correct end point in the uploadToDb method.
+5. You can test if the database was properly populate using the sql command below or sending a get request to the api(see above for sample api requests).
+
+```sql
+select * from hltv_match;
+```
+
 <!-- CONTRIBUTING -->
 ## Contributing
 
