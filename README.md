@@ -113,7 +113,8 @@ The second aspect of this project is the web scraping script to gather all poten
   - [] Bug fix error regarding incomplete data for 2% of matches
 - [] Server
   - [x] Physical server setup
-  - [] Port Existing SQL database to server
+  - [x] Port Existing SQL database to server
+  - [] Hosting for the api on server
 - [] Potential Future
   - [] Setup a Web App to interact with the match data
   - [] Data Analysis on said CS: GO matches
