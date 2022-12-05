@@ -108,18 +108,25 @@ The second aspect of this project is the web scraping script to gather all poten
   - [x] Advanced Match Breakdown
   - [x] Documentation Completion
 - [] Automation
-  - [x] Automated Webscraping for HLTV Match Data
+  - [x] Automated Web scraping for HLTV Match Data
   - [x] Connection to database to upload data
 - [] Server
   - [x] Physical server setup
-  - [ ] Port Exisiting SQL databse to server
+  - [ ] Port Existing SQL database to server
 - [] Potential Future
   - [] Setup a Web App to interact with the match data
   - [] Data Analysis on said CS: GO matches
   - [] Make API public use/setup auth key
 
 ## Setup & Getting Started
-dasda
+
+Check example configs folder for example MySql commands to replicate the database being used as well as a basic application.properties needed for the api to function.
+If you would like to run locally follow these instructions.
+# Steps
+1. a
+2. b
+3. c
+
 <!-- CONTRIBUTING -->
 ## Contributing
 
