@@ -248,7 +248,7 @@ class HltvScraper():
         self.soup = BeautifulSoup(self.page.content, "html.parser")
         try:
             # self.gatherSize()
-            self.size = 4100  # Error starts at 4000
+            self.size = 4200  # Error starts at 4200
             urlList = self.urlGenerator()
             self.processData(urlList)
         except:
