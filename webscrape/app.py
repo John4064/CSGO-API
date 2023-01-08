@@ -202,6 +202,8 @@ class HltvScraper():
         count =0
         for iter in range(self.size):
             check =self.teamA[iter].lower().replace(" ","-").replace(".","").replace("'","").replace("á","").replace("&","")
+            if "--" in check:
+                check = check.replace("--", "-")
             if(check not in self.urlList[iter]):
                 count+=1
                 print(check)
