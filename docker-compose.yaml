@@ -1,0 +1,15 @@
+version: '2'
+services:
+  csgoapi-server:
+    container_name: csgoapi-server
+    build:
+      context: Csgo-api
+      dockerfile: Dockerfile
+    image: csgoapi-server:latest
+    ports:
+      - 8080:8080
+    networks:
+      - spring-cloud-network
+networks:
+  spring-cloud-network:
+    driver: bridge
