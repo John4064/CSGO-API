@@ -154,7 +154,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## Support
 
-For support, create a pull request or email jparkhurst120@gmail.com
+For support, create a pull request(Recommended) or email jparkhurst120@gmail.com
 
 
 ## Authors
