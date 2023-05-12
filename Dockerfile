@@ -1,4 +1,7 @@
 FROM amazoncorretto:17.0.4
 MAINTAINER Parkhurst
-COPY target/restapi-0.0.1-SNAPSHOT.jar restapi-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","/restapi-0.0.1-SNAPSHOT.jar"]
+VOLUME /tmp
+EXPOSE 8080
+ARG JAR_FILE=target/app.jar
+ADD ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
