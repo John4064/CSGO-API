@@ -193,13 +193,23 @@ class HltvScraper():
     def putObj(self):
         # Replace with size after testing
         # Debuging
-        # print(len(self.idList))
-        # print(len(self.teamA)) #wrong
-        # print(len(self.teamB))#wrong
-        # print(len(self.scoreA))#wrong
+        print(len(self.idList))
+        print(len(self.teamA)) #wrong
+        #print(len(self.teamB))#wrong
+        print(len(self.scoreA))#wrong
         # print(len(self.scoreB))#wrong
         log.info("Beginning Merging Data to Objects")
+        count =0
         for iter in range(self.size):
+            check =self.teamA[iter].lower().replace(" ","-").replace(".","").replace("'","").replace("á","").replace("&","")
+            if "--" in check:
+                check = check.replace("--", "-")
+            if(check not in self.urlList[iter]):
+                count+=1
+                print(check)
+                print(self.teamA[iter])
+                print(self.urlList[iter])
+                print(iter)
             temp = hltvMatch(self.idList[iter], self.urlList[iter], self.teamA[iter], self.teamB[iter],
                              self.scoreA[iter],
                              self.scoreB[iter], self.compEvent[iter], self.matchType[iter])
@@ -238,7 +248,7 @@ class HltvScraper():
         self.soup = BeautifulSoup(self.page.content, "html.parser")
         try:
             # self.gatherSize()
-            self.size = 3000  # Error starts at 4000
+            self.size = 4200  # Error starts at 4200
             urlList = self.urlGenerator()
             self.processData(urlList)
         except:
@@ -248,5 +258,6 @@ class HltvScraper():
         self.putObj()
         log.debug("Match Length: ", len(self.matchList))
         # self.report()
-        self.uploadToDatabase()
+        #self.uploadToDatabase()
+        print(len(self.matchList))
         print("DONE")
