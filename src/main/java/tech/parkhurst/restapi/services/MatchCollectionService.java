@@ -25,13 +25,15 @@ public class MatchCollectionService {
         System.out.println("GATHER STATISTICS");
 
         try{
-            Document doc = Jsoup.connect("https://hltv.org/")
+            Document doc = Jsoup.connect("https://hltv.org/results")
                     .header("Content-Type","application/x-www-form-urlencoded")
                     .header("Referrer Policy","strict-origin-when-cross-origin")
                     .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0")
                     .referrer("http://www.google.com")
                     .get();
-            System.out.println(doc.title());
+            System.out.println(doc.attr("pagination-data"));
+            System.exit(32);
+            System.out.println("Shouldn't Reach");
             //Elements newsHeadlines = doc.select("#mp-itn b a");
         }catch (Exception e){
             System.out.println("Shit Failed");
