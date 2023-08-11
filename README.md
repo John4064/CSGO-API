@@ -3,7 +3,7 @@
 
 A Rest API for CS:GO professional matches through match data gathered by HLTV.
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://choosealicense.com/licenses/mit/)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://choosealicense.com/licenses/mit/) [![CodeQL](https://github.com/John4064/CSGO-API/actions/workflows/codeql.yml/badge.svg?branch=main&event=push)](https://github.com/John4064/CSGO-API/actions/workflows/codeql.yml)
 
 
 
