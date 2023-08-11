@@ -1,11 +1,14 @@
 package tech.parkhurst.restapi.entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import javax.persistence.*;
 
 @Entity
-@Table(name = "hltv_match", schema = "csgodata")
+@Table(name = "hltv_match", schema = "testdb")
 public class HltvMatch {
 
     public HltvMatch(){
