@@ -36,6 +36,10 @@ public class MatchCollectionService {
         }
     }
 
+    public void gatherTeamData() throws IOException{
+
+    }
+
     @PostConstruct
     public void init() throws IOException {
         System.out.println("GATHER STATISTICS");
@@ -48,12 +52,17 @@ public class MatchCollectionService {
                     .get();
             totalMatches=gatherSize();
             ScrapeUtils.generateUrls(totalMatches);
-
+            Elements rows = doc.select("div.result-con");
+            System.out.println(rows.toString());
+//            for (Element row : rows) {
+//                String event = row.select("td:team-cell").text();
+//                System.out.println(event);
+//            }
 
             //Elements newsHeadlines = doc.select("#mp-itn b a");
         }catch (Exception e){
             System.out.println("Shit Failed");
-            System.exit(32);
+            System.out.println(e.toString());
         }
     }
 
