@@ -10,9 +10,6 @@ public class ScrapeUtils {
             System.out.println(x);
             urlList.add(String.format(baseUrl,x));
         }
-        for(int y=0;y<urlList.size();y++){
-            System.out.println(urlList.get(y));
-        }
         return urlList;
     }
 }
