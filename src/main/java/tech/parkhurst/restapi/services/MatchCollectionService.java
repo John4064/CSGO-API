@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import tech.parkhurst.restapi.utils.ScrapeUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
@@ -46,8 +47,7 @@ public class MatchCollectionService {
                     .referrer("http://www.google.com")
                     .get();
             totalMatches=gatherSize();
-            System.out.println(totalMatches);
-            //pagination-data]
+            ScrapeUtils.generateUrls(totalMatches);
 
 
             //Elements newsHeadlines = doc.select("#mp-itn b a");
