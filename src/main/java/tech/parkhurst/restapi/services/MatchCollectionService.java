@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import static java.rmi.server.LogStream.log;
@@ -39,6 +40,31 @@ public class MatchCollectionService {
     public void gatherTeamData() throws IOException{
 
     }
+    public void deadCodeUselessTest()throws IOException{
+        ArrayList<String> urlList =ScrapeUtils.generateUrls(totalMatches);
+        ArrayList<Integer> countList = new ArrayList<>();
+        int a =0;
+        for (String url : urlList){
+            doc = Jsoup.connect(url)
+                    .header("Content-Type","application/x-www-form-urlencoded")
+                    .header("Referrer Policy","strict-origin-when-cross-origin")
+                    .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0")
+                    .referrer("http://www.google.com")
+                    .get();
+            Elements tempRows = doc.select("div.result-con");
+            countList.add(tempRows.size());
+            System.out.println("Another One COmplete"+a);
+            a+=1;
+        }
+
+        for (int x = 0; x<countList.size();x++){
+            System.out.println(countList.get(x));
+            if(countList.get(x) != 100){
+                System.out.println("THE INDEX IS "+x);
+            }
+        }
+        return;
+    }
 
     @PostConstruct
     public void init() throws IOException {
@@ -51,13 +77,35 @@ public class MatchCollectionService {
                     .referrer("http://www.google.com")
                     .get();
             totalMatches=gatherSize();
-            ScrapeUtils.generateUrls(totalMatches);
+            ArrayList<String> urlList =ScrapeUtils.generateUrls(totalMatches);
             Elements rows = doc.select("div.result-con");
-            System.out.println(rows.toString());
-//            for (Element row : rows) {
-//                String event = row.select("td:team-cell").text();
-//                System.out.println(event);
-//            }
+            //Successful ways to get data of  doc.select("div.result-con");
+            //doc.select("a.a-reset").forEach(System.out::println);
+            //System.out.println(row.child(0).text());
+            ArrayList<String> rawStringDataList = new ArrayList<String>();
+            for(Element row : rows){
+//                Element link = row.select("a").first();
+//                System.out.println(link.text());
+//                System.out.println(link.attr("href"));//split by / and tempList[2] seems good
+                Element resultTableRow = row.select("tr").first();
+                Elements resultTableCols = resultTableRow.select("td");
+                for (Element col: resultTableCols){
+                    //System.out.print(temp.text()+"____");
+                    System.out.print(col.className()+" ");
+                    if(col.className().equals("star-cell")){
+                        System.out.println(col.text());
+                    }
+                    /**TODO: Next is to break down each  column and verify correct mapping
+                     *  Challenge will be regarding team-cell and team-cell verifying
+                     *  not only keep values consistent but also correct with score
+                     */
+                }
+                System.out.println("NEXT ROW");
+                //System.out.println(test.text());
+
+
+                System.out.println("-");
+            }
 
             //Elements newsHeadlines = doc.select("#mp-itn b a");
         }catch (Exception e){
