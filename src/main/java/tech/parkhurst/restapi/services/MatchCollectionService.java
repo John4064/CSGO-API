@@ -9,19 +9,17 @@ import org.springframework.stereotype.Service;
 import tech.parkhurst.restapi.utils.ScrapeUtils;
 
 import javax.annotation.PostConstruct;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import static java.rmi.server.LogStream.log;
 
+
 @Component
 public class MatchCollectionService {
 
+    private static final String baseUrl="https://www.hltv.org";
     private Document doc;
     private int totalMatches;
 
@@ -79,7 +77,7 @@ public class MatchCollectionService {
             totalMatches=gatherSize();
             ArrayList<String> urlList =ScrapeUtils.generateUrls(totalMatches);
             // Select all elements with class "result"
-            Elements resultElements = doc.select(".result");
+            Elements resultElements = doc.select(".result-con");
             int a =0;
             for (Element resultElement : resultElements) {
                 // Get team names
@@ -96,64 +94,21 @@ public class MatchCollectionService {
                 // Get map
                 String map = resultElement.select(".map-text").text();
 
+                //Gather Href
+//
+                String href = resultElement.select("a.a-reset").attr("href");
+
                 // Print or process the extracted information
                 System.out.println("Team 1: " + team1);
                 System.out.println("Team 2: " + team2);
                 System.out.println("Score: " + scoreLost + " - " + scoreWon);
                 System.out.println("Event Name: " + eventName);
                 System.out.println("Map: " + map);
+                System.out.println("URL: "+baseUrl+href);
                 System.out.println("COUNT: "+a);
                 System.out.println("====================");
                 a++;
             }
-
-
-
-
-//            Elements rows = doc.select("div.result-con");
-//            //Successful ways to get data of  doc.select("div.result-con");
-//            //doc.select("a.a-reset").forEach(System.out::println);
-//            //System.out.println(row.child(0).text());
-//            ArrayList<String> rawStringDataList = new ArrayList<String>();
-//            for(Element row : rows){
-////                Element link = row.select("a").first();
-////                System.out.println(link.text());
-////                System.out.println(link.attr("href"));//split by / and tempList[2] seems good
-//                Element resultTableRow = row.select("tr").first();
-//                Elements resultTableCols = resultTableRow.select("td");
-//                int team=0;
-//                for (Element col: resultTableCols){
-//                    //System.out.print(temp.text()+"____");
-//                    if(col.className().equals("team-cell") && team==0){
-//                        System.out.print(col.text()+" A ");
-//                        team+=1;
-//                    }else if(col.className().equals("team-cell") && team==1){
-//                        System.out.println(col.text()+" B ");
-//
-//                    }else if(col.className().equals("result-score")){
-//                        System.out.print(col.text()+" ");
-//                    }
-//                    /**TODO: Next is to break down each  column and verify correct mapping
-//                     *  Challenge will be regarding team-cell and team-cell verifying
-//                     *  not only keep values consistent but also correct with score
-//                     */
-//                    /**
-//                     * self.soup.find_all("div", class_="line-align team1"),
-//                     * self.soup.find_all("div", class_="line-align team2"),
-//                     *self.soup.find_all("div", class_="team team-won")):
-//                     * wont work team-won was removed(assholes)
-//                     */
-//                    //first one found is teama and second is teamb & similar to score discovered
-//
-//                }
-//                System.out.println("NEXT ROW");
-//                //System.out.println(test.text());
-//
-//
-//                System.out.println("-");
-//            }
-
-            //Elements newsHeadlines = doc.select("#mp-itn b a");
         }catch (Exception e){
             System.out.println("Shit Failed");
             System.out.println(e.toString());
