@@ -81,8 +81,13 @@ public class MatchCollectionService {
             int a =0;
             for (Element resultElement : resultElements) {
                 // Get team names
-                String team1 = resultElement.select(".team1 .team").text();
-                String team2 = resultElement.select(".team2 .team").text();
+                String teamA = resultElement.select(".team1 .team").text();
+                String teamB = resultElement.select(".team2 .team").text();
+                String temp = resultElement.select(".result-score").text();
+                String[] testList =new String[2];
+                testList=temp.split(" - ");
+                int scoreTA=Integer.parseInt(testList[0]);
+                int scoreTB = Integer.parseInt(testList[1]);
 
                 // Get scores
                 String scoreLost = resultElement.select(".result-score .score-lost").text();
@@ -99,9 +104,11 @@ public class MatchCollectionService {
                 String href = resultElement.select("a.a-reset").attr("href");
 
                 // Print or process the extracted information
-                System.out.println("Team 1: " + team1);
-                System.out.println("Team 2: " + team2);
-                System.out.println("Score: " + scoreLost + " - " + scoreWon);
+                System.out.println("Team A: " + teamA);
+                System.out.println("Team B: " + teamB);
+//                System.out.println("Score: " + scoreLost + " - " + scoreWon);
+                System.out.println("Score for teamA and teamB: "+scoreTA+" "+scoreTB);
+
                 System.out.println("Event Name: " + eventName);
                 System.out.println("Map: " + map);
                 System.out.println("URL: "+baseUrl+href);
@@ -109,8 +116,11 @@ public class MatchCollectionService {
                 System.out.println("====================");
                 a++;
             }
+        }catch (NumberFormatException ne){
+            System.out.println("Error converting the score");
+            System.out.println(ne.toString());
         }catch (Exception e){
-            System.out.println("Shit Failed");
+            System.out.println("Generic Scraping Error");
             System.out.println(e.toString());
         }
     }
