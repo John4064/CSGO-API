@@ -78,34 +78,78 @@ public class MatchCollectionService {
                     .get();
             totalMatches=gatherSize();
             ArrayList<String> urlList =ScrapeUtils.generateUrls(totalMatches);
-            Elements rows = doc.select("div.result-con");
-            //Successful ways to get data of  doc.select("div.result-con");
-            //doc.select("a.a-reset").forEach(System.out::println);
-            //System.out.println(row.child(0).text());
-            ArrayList<String> rawStringDataList = new ArrayList<String>();
-            for(Element row : rows){
-//                Element link = row.select("a").first();
-//                System.out.println(link.text());
-//                System.out.println(link.attr("href"));//split by / and tempList[2] seems good
-                Element resultTableRow = row.select("tr").first();
-                Elements resultTableCols = resultTableRow.select("td");
-                for (Element col: resultTableCols){
-                    //System.out.print(temp.text()+"____");
-                    System.out.print(col.className()+" ");
-                    if(col.className().equals("star-cell")){
-                        System.out.println(col.text());
-                    }
-                    /**TODO: Next is to break down each  column and verify correct mapping
-                     *  Challenge will be regarding team-cell and team-cell verifying
-                     *  not only keep values consistent but also correct with score
-                     */
-                }
-                System.out.println("NEXT ROW");
-                //System.out.println(test.text());
+            // Select all elements with class "result"
+            Elements resultElements = doc.select(".result");
 
+            for (Element resultElement : resultElements) {
+                // Get team names
+                String team1 = resultElement.select(".team1 .team").text();
+                String team2 = resultElement.select(".team2 .team").text();
 
-                System.out.println("-");
+                // Get scores
+                String scoreLost = resultElement.select(".result-score .score-lost").text();
+                String scoreWon = resultElement.select(".result-score .score-won").text();
+
+                // Get event name
+                String eventName = resultElement.select(".event-name").text();
+
+                // Get map
+                String map = resultElement.select(".map-text").text();
+
+                // Print or process the extracted information
+                System.out.println("Team 1: " + team1);
+                System.out.println("Team 2: " + team2);
+                System.out.println("Score: " + scoreLost + " - " + scoreWon);
+                System.out.println("Event Name: " + eventName);
+                System.out.println("Map: " + map);
+                System.out.println("====================");
             }
+
+
+
+
+//            Elements rows = doc.select("div.result-con");
+//            //Successful ways to get data of  doc.select("div.result-con");
+//            //doc.select("a.a-reset").forEach(System.out::println);
+//            //System.out.println(row.child(0).text());
+//            ArrayList<String> rawStringDataList = new ArrayList<String>();
+//            for(Element row : rows){
+////                Element link = row.select("a").first();
+////                System.out.println(link.text());
+////                System.out.println(link.attr("href"));//split by / and tempList[2] seems good
+//                Element resultTableRow = row.select("tr").first();
+//                Elements resultTableCols = resultTableRow.select("td");
+//                int team=0;
+//                for (Element col: resultTableCols){
+//                    //System.out.print(temp.text()+"____");
+//                    if(col.className().equals("team-cell") && team==0){
+//                        System.out.print(col.text()+" A ");
+//                        team+=1;
+//                    }else if(col.className().equals("team-cell") && team==1){
+//                        System.out.println(col.text()+" B ");
+//
+//                    }else if(col.className().equals("result-score")){
+//                        System.out.print(col.text()+" ");
+//                    }
+//                    /**TODO: Next is to break down each  column and verify correct mapping
+//                     *  Challenge will be regarding team-cell and team-cell verifying
+//                     *  not only keep values consistent but also correct with score
+//                     */
+//                    /**
+//                     * self.soup.find_all("div", class_="line-align team1"),
+//                     * self.soup.find_all("div", class_="line-align team2"),
+//                     *self.soup.find_all("div", class_="team team-won")):
+//                     * wont work team-won was removed(assholes)
+//                     */
+//                    //first one found is teama and second is teamb & similar to score discovered
+//
+//                }
+//                System.out.println("NEXT ROW");
+//                //System.out.println(test.text());
+//
+//
+//                System.out.println("-");
+//            }
 
             //Elements newsHeadlines = doc.select("#mp-itn b a");
         }catch (Exception e){
