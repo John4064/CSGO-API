@@ -80,7 +80,7 @@ public class MatchCollectionService {
             ArrayList<String> urlList =ScrapeUtils.generateUrls(totalMatches);
             // Select all elements with class "result"
             Elements resultElements = doc.select(".result");
-
+            int a =0;
             for (Element resultElement : resultElements) {
                 // Get team names
                 String team1 = resultElement.select(".team1 .team").text();
@@ -102,7 +102,9 @@ public class MatchCollectionService {
                 System.out.println("Score: " + scoreLost + " - " + scoreWon);
                 System.out.println("Event Name: " + eventName);
                 System.out.println("Map: " + map);
+                System.out.println("COUNT: "+a);
                 System.out.println("====================");
+                a++;
             }
 
 
