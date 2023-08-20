@@ -39,31 +39,6 @@ public class MatchCollectionService {
             return -1;
         }
     }
-    public void deadCodeUselessTest()throws IOException{
-        ArrayList<String> urlList =ScrapeUtils.generateUrls(totalMatches);
-        ArrayList<Integer> countList = new ArrayList<>();
-        int a =0;
-        for (String url : urlList){
-            doc = Jsoup.connect(url)
-                    .header("Content-Type","application/x-www-form-urlencoded")
-                    .header("Referrer Policy","strict-origin-when-cross-origin")
-                    .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0")
-                    .referrer("http://www.google.com")
-                    .get();
-            Elements tempRows = doc.select("div.result-con");
-            countList.add(tempRows.size());
-            System.out.println("Another One COmplete"+a);
-            a+=1;
-        }
-
-        for (int x = 0; x<countList.size();x++){
-            System.out.println(countList.get(x));
-            if(countList.get(x) != 100){
-                System.out.println("THE INDEX IS "+x);
-            }
-        }
-        return;
-    }
 
     @PostConstruct
     public void init() throws IOException {
@@ -122,7 +97,4 @@ public class MatchCollectionService {
             System.out.println(e.toString());
         }
     }
-
-
-
 }
