@@ -17,4 +17,6 @@ public interface MatchRepo extends JpaRepository<HltvMatch, String> {
     @Query(value = "SELECT * FROM hltv_match LIMIT :num", nativeQuery = true)
     List<HltvMatch> findAllTopN(@Param("num") int num);
 
+    @Query(value="select match_id from hltv_match;",nativeQuery = true)
+    List<String> findAllIds();
 }

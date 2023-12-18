@@ -4,25 +4,26 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import tech.parkhurst.restapi.entities.HltvMatch;
 import tech.parkhurst.restapi.utils.ScrapeUtils;
-
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Logger;
-
-import static java.rmi.server.LogStream.log;
 
 
-@Component
+@Service
 public class MatchCollectionService {
+
 
     @Autowired
     private MatchServices matchServices;
+
+    private static final Logger logger = LoggerFactory.getLogger(MatchCollectionService.class);
 
     private static final String baseUrl="https://www.hltv.org";
     private Document doc;
@@ -40,10 +41,13 @@ public class MatchCollectionService {
         }
     }
 
+
+    @Async
     @PostConstruct
     public void init() throws IOException {
-        System.out.println("GATHER STATISTICS");
+        logger.info("Gathering new data!");
         try{
+            ArrayList<String> idList= (ArrayList<String>) matchServices.getIDList();
             doc = Jsoup.connect("https://hltv.org/results")
                     .header("Content-Type","application/x-www-form-urlencoded")
                     .header("Referrer Policy","strict-origin-when-cross-origin")
@@ -52,8 +56,6 @@ public class MatchCollectionService {
                     .get();
             totalMatches=gatherSize();
             ArrayList<String> urlList =ScrapeUtils.generateUrls(totalMatches);
-            int testV = totalMatches/100;
-            System.out.println(testV);
             for(String url: urlList){
                 doc = Jsoup.connect(url)
                         .header("Content-Type","application/x-www-form-urlencoded")
@@ -84,10 +86,14 @@ public class MatchCollectionService {
                     //TODO: Add a quality check here!
                     a++;
                     HltvMatch tempMatch = new HltvMatch(matchID,teamA,teamB,baseUrl+href,scoreTA,scoreTB,eventName,mapType);
-                    matchServices.createMatch(tempMatch);
-                    System.out.println(Math.round(100*(a*100)/totalMatches));//Refine loading text
-            }
-
+                    if(idList.contains(tempMatch.getMatchid())){
+                        logger.info("No more new matches detected;");
+                        return;
+                    }else{
+                        logger.info("Inserted new match with ID: "+tempMatch.getMatchid());
+                        matchServices.createMatch(tempMatch);
+                    }//2368724
+                }
             }
         }catch (NumberFormatException ne){
             System.out.println("Error converting the score ");

@@ -13,6 +13,9 @@ public class MatchServices {
     @Autowired
     private MatchRepo MatchRepository;
 
+    public List<String> getIDList(){
+        return MatchRepository.findAllIds();
+    }
 
     /**
      * @return returns all the data from the specified table(hltv_match)

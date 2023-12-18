@@ -22,6 +22,11 @@ public class MatchController {
         return ResponseEntity.ok(services.getUserList());
     }
 
+    @GetMapping("/gatherids")
+    public ResponseEntity<List<String>> getIds(){
+        return ResponseEntity.ok(services.getIDList());
+    }
+
     @GetMapping("/match/{id}")
     public ResponseEntity<HltvMatch> getMatchById(@PathVariable String id) {
         HltvMatch specMatch = this.services.getMatchById(id);
