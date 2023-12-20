@@ -1,6 +1,5 @@
 package tech.parkhurst.restapi.controllers;
 
-import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.parkhurst.restapi.entities.HltvMatch;
 import tech.parkhurst.restapi.exceptions.MatchIdFoundException;
 import tech.parkhurst.restapi.exceptions.MatchNotfoundException;
-import tech.parkhurst.restapi.services.MatchServices;
+import tech.parkhurst.restapi.services.impl.MatchServiceImpl;
 
 
 @RestController
@@ -20,7 +19,7 @@ import tech.parkhurst.restapi.services.MatchServices;
 public class AdminController {
 
     @Autowired
-    private MatchServices services;
+    private MatchServiceImpl services;
 
     static Logger log = LogManager.getLogger(AdminController.class.getName());
 
