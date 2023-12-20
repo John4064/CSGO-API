@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import tech.parkhurst.restapi.exceptions.MatchNotfoundException;
-import tech.parkhurst.restapi.services.MatchServices;
+import tech.parkhurst.restapi.services.impl.MatchServiceImpl;
 import tech.parkhurst.restapi.entities.HltvMatch;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class MatchController {
 
     @Autowired
-    private MatchServices services;
+    private MatchServiceImpl services;
 
     @GetMapping("/findall")
     public ResponseEntity<List<HltvMatch>> findAll(){

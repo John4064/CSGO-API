@@ -1,4 +1,4 @@
-package tech.parkhurst.restapi.services;
+package tech.parkhurst.restapi.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.parkhurst.restapi.entities.HltvMatch;
@@ -8,7 +8,7 @@ import tech.parkhurst.restapi.repositories.MatchRepo;
 import java.util.List;
 
 @Service
-public class MatchServices {
+public class MatchServiceImpl {
 
     @Autowired
     private MatchRepo MatchRepository;

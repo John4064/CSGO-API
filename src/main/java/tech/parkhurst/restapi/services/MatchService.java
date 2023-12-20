@@ -1,5 +1,4 @@
 package tech.parkhurst.restapi.services;
 
-public interface MatchCollectionService
-{
+public interface MatchService {
 }
