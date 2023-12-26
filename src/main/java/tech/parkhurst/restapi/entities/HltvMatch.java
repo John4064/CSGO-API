@@ -93,15 +93,4 @@ public class HltvMatch {
                 '}';
     }
 
-    public void printData(){
-//        System.out.println("Team A: " + teamA);
-//        System.out.println("Team B: " + teamB);
-//        System.out.println("Score for teamA and teamB: "+scoreTA+" "+scoreTB);
-//        System.out.println("Event Name: " + eventName);
-//        System.out.println("Map: " + map);
-//        System.out.println("URL: "+baseUrl+href);
-//        System.out.println("COUNT: "+a);
-//        System.out.println("====================");
-        return;
-    }
 }

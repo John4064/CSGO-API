@@ -13,7 +13,10 @@ import tech.parkhurst.restapi.entities.HltvMatch;
 import tech.parkhurst.restapi.utils.ScrapeUtils;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @Service
@@ -36,7 +39,7 @@ public class MatchCollectionServiceImpl {
             return Integer.parseInt(splited[splited.length-1]);
         }catch (Exception e){
             System.out.println("Unable to convert string to integer upon gathering size");
-            System.out.println(e.toString());
+            System.out.println(e);
             return -1;
         }
     }
@@ -57,17 +60,24 @@ public class MatchCollectionServiceImpl {
      */
      public void gatherTeams() throws IOException{
         try{
-            doc = Jsoup.connect("https://hltv.org/results")
-                    .header("Content-Type","application/x-www-form-urlencoded")
-                    .header("Referrer Policy","strict-origin-when-cross-origin")
-                    .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0")
-                    .referrer("http://www.google.com")
-                    .get();
+            ArrayList<Integer> years =new ArrayList<>(Arrays.asList(2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024));
+            if(years.contains( Year.now().getValue())){
+                years.add(Year.now().getValue());
+            }
+            //Todo: Check current year
+            for(Integer year: years){
+                doc = Jsoup.connect("https://www.hltv.org/stats/teams?startDate=2022-01-01&endDate=2022-12-31s")
+                        .header("Content-Type","application/x-www-form-urlencoded")
+                        .header("Referrer Policy","strict-origin-when-cross-origin")
+                        .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0")
+                        .referrer("http://www.google.com")
+                        .get();
+                logger.info(year.toString());
+            }
         }catch(Exception e){
             logger.error("ERROR GATHERING TEAM DATA");
         }
-        return;
-    }
+     }
 
     public void gatherPlayers() throws IOException{
         try{
@@ -80,7 +90,6 @@ public class MatchCollectionServiceImpl {
         }catch(Exception e){
             logger.error("ERROR GATHERING TEAM DATA");
         }
-         return;
     }
 
     public void gatherMatchData() throws IOException{
