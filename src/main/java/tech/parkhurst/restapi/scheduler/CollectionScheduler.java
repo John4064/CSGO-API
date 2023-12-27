@@ -25,6 +25,6 @@ public class CollectionScheduler {
     public void dailyUpdate() throws IOException {
         logger.info("GIGGITY");
         matchCollectionServiceImpl.gatherMatchData();
-        return;
+        matchCollectionServiceImpl.gatherTeams();
     }
 }

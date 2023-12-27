@@ -13,6 +13,13 @@ public class MatchServiceImpl {
     @Autowired
     private MatchRepo MatchRepository;
 
+    /**
+     * @return Count of all entries in hltv_match
+     */
+    public int getMatchCount(){
+        return (int) MatchRepository.count();
+    }
+
     public List<String> getIDList(){
         return MatchRepository.findAllIds();
     }

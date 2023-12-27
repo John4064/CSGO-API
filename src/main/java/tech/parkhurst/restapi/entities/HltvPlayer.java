@@ -1,37 +1,26 @@
 package tech.parkhurst.restapi.entities;
 
-import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.data.annotation.Id;
 
 //CONVERTING THIS TO MONGO
 
-@Entity
-@Table(name = "hltv_player", schema = "testdb")
 public class HltvPlayer {
     @Id
-    @Column(name="playerName")
     private String playerName;
 
-    @ElementCollection
-    @Column(name="playerTeams")
+
     private List<String> teamName;
 
-    @Column(name="playerMapCount")
     private int mapCount;
 
-    @Column(name="playerRoundCount")
     private int roundCount;
 
-    @Column(name="playerKDDiff")
     private int kdDiff;
 
-    @Column(name="playerKD")
     private float playerKD;
 
-    @Column(name="playerRating")
     private float playerRating;
 
     public HltvPlayer(String playerName, List<String> teamName, int mapCount, int roundCount, int kdDiff, float playerKD, float playerRating) {
