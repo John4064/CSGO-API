@@ -19,4 +19,5 @@ public interface MatchRepo extends JpaRepository<HltvMatch, String> {
 
     @Query(value="select match_id from hltv_match;",nativeQuery = true)
     List<String> findAllIds();
+
 }
