@@ -133,7 +133,7 @@ public class MatchCollectionServiceImpl {
                         .get();
                 // Select all elements with class "result"
                 Elements resultElements = doc.select(".result-con");
-                int a = 0;
+                int fetchedMatchCount = 0;
                 for (Element resultElement : resultElements) {
                     // Get team names
                     String teamA = resultElement.select(".team1 .team").text();
@@ -151,10 +151,14 @@ public class MatchCollectionServiceImpl {
                     String href = resultElement.select("a.a-reset").attr("href");
                     //Get ID
                     String matchID = href.split("/")[2];
-                    //TODO: Add a quality check here!
-                    a++;
-                    HltvMatch tempMatch = new HltvMatch(matchID, teamA, teamB, baseUrl + href, scoreTA, scoreTB, eventName, mapType);
-                    if (idList.contains(tempMatch.getMatchid())) {
+                    //Quality check
+                    if(resultElements.size() == matchServicesImpl.getIDList().size()){
+                        logger.info("No more new matches detectted;");
+                        return;
+                    }
+                    fetchedMatchCount++;
+                    HltvMatch tempMatch = new HltvMatch(matchID,teamA,teamB,baseUrl+href,scoreTA,scoreTB,eventName,mapType);
+                    if(idList.contains(tempMatch.getMatchid())){
                         logger.info("No more new matches detected;");
                         return;
                     } else {
