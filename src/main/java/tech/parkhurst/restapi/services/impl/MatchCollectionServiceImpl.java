@@ -122,8 +122,8 @@ public class MatchCollectionServiceImpl {
                     //Get ID
                     String matchID = href.split("/")[2];
                     //Quality check
-                    if(fetchedMatchCount >= idList.size()){
-                        logger.info("No more new matches detected;");
+                    if(resultElements.size() == matchServicesImpl.getIDList().size()){
+                        logger.info("No more new matches detectted;");
                         return;
                     }
                     fetchedMatchCount++;
