@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import tech.parkhurst.restapi.services.impl.MatchCollectionServiceImpl;
+import tech.parkhurst.restapi.services.MatchCollectionService;
 
 import java.io.IOException;
 
@@ -17,14 +17,13 @@ public class CollectionScheduler {
     private static final Logger logger = LoggerFactory.getLogger(CollectionScheduler.class);
 
     @Autowired
-    private MatchCollectionServiceImpl matchCollectionServiceImpl;
-
+    private MatchCollectionService matchCollectionService;
 
     @Async
     @Scheduled(cron = "0 1 1 * * ?")
     public void dailyUpdate() throws IOException {
         logger.info("GIGGITY");
-        matchCollectionServiceImpl.gatherMatchData();
-        matchCollectionServiceImpl.gatherTeams();
+        matchCollectionService.gatherMatchData();
+        matchCollectionService.gatherTeams();
     }
 }

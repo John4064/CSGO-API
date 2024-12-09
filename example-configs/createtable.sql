@@ -8,3 +8,13 @@ create table hltv_match(
     score_tb Integer,
     match_id varchar(100) NOT NULL PRIMARY KEY
 );
+
+create table hltv_team(
+    team_name varchar(255),
+    "year" Integer,
+    map_count Integer,
+    kd_diff Integer,
+    team_kd Float,
+    average_rating Float,
+    team_id Integer NOT NULL PRIMARY KEY
+);

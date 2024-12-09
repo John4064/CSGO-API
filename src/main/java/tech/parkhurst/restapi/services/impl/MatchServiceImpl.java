@@ -1,17 +1,24 @@
 package tech.parkhurst.restapi.services.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.parkhurst.restapi.entities.HltvMatch;
 import org.springframework.stereotype.Service;
 import tech.parkhurst.restapi.repositories.MatchRepo;
+import tech.parkhurst.restapi.services.MatchService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MatchServiceImpl {
+public class MatchServiceImpl implements MatchService {
 
     @Autowired
     private MatchRepo MatchRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(MatchServiceImpl.class);
+
 
     /**
      * @return Count of all entries in hltv_match
@@ -75,10 +82,17 @@ public class MatchServiceImpl {
     }
 
     /**
-     * @param match is an HltvMatch object that we add to our db
+     * @param matches is an HltvMatch object that we add to our db
      * @return
      */
-    public HltvMatch createMatch(HltvMatch match) {
-        return MatchRepository.save(match);
+    public HltvMatch insertMatches(ArrayList<HltvMatch> matches) {
+        //RETURN
+
+        final long startTime = System.currentTimeMillis();
+        MatchRepository.saveAll(matches);
+        final long endTime = System.currentTimeMillis();
+        logger.info("HLTV-Match import time took {} seconds", ((endTime-startTime)/1000) %60);
+
+        return null;
     }
 }

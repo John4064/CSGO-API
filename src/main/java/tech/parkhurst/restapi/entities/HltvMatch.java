@@ -6,9 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
+//@Table(name = "hltv_match", schema = "rcsdb")
 @Entity
-@Table(name = "hltv_match", schema = "testdb")
+@Table(name = "hltv_match")
 public class HltvMatch {
 
     public HltvMatch(){
